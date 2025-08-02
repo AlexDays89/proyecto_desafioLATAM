@@ -1,5 +1,5 @@
 import '../assets/styles/navbar.css'
-import Navigation from './Navigation';
+import Navigation from './navigation';
 import { useContext } from 'react';
 import Boton from './boton';
 import { useCart } from '../context/useCart';

@@ -1,4 +1,4 @@
-import Navigation from '../components/Navigation';
+import Navigation from '../components/navigation';
 import Boton from '../components/boton';
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
