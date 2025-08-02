@@ -1,0 +1,12 @@
+#root{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.vistaHome {
+    position: absolute;
+    top: 3px;
+    left: 30px;
+}

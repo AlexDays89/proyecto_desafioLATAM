@@ -1,0 +1,12 @@
+.principal {
+    display: flex;
+    width: 95vw;
+    border: 1px solid #ccc;
+}
+
+.principal p {
+    position: relative;
+    text-align: start;
+    top: 0px;
+    left: 0px;
+}

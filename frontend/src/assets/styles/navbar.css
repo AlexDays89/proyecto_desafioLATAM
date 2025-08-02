@@ -1,0 +1,11 @@
+.navbar {
+    width: 95vw;
+    border: 1px solid #ccc;
+}
+
+.navbar p {
+    position: relative;
+    text-align: start;
+    top: 0px;
+    left: 0px;
+}
