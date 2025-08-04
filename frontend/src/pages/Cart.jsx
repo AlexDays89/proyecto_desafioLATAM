@@ -13,7 +13,7 @@ const Cart = () => {
   const renderCartItem = ({ id, name, price, count, img }) => (
     <li key={id} className="cart-item">
       <div>
-        <img className="imagenpizza" src={img} alt={`Imagen de ${name}`} />
+        <img className="imagenProducto" src={img} alt={`Imagen de ${name}`} />
       </div>
       <div>
         <p>{name}</p>

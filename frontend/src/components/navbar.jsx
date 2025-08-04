@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import Boton from './boton';
 import { useCart } from '../context/useCart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPizzaSlice, faShoppingCart, faLockOpen, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faLockOpen, faLock } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../context/UserContext';
 
 const Navbar = () => {
@@ -22,7 +22,15 @@ return (
             <Boton
             className = "boton"
             variante="outline-light text-light bg-dark"
-            texto={<><FontAwesomeIcon icon={faPizzaSlice} /> Home</>}
+            texto="Home"
+            />
+        </Navigation>
+
+        <Navigation to="/">
+            <Boton
+            className = "boton"
+            variante="outline-light text-light bg-dark"
+            texto="Tienda"
             />
         </Navigation>
 
@@ -56,6 +64,14 @@ return (
             </Navigation>
             </>
         )}
+
+        <Navigation to="/">
+            <Boton
+            className = "boton"
+            variante="outline-light text-light bg-dark"
+            texto="Contacto"
+            />
+        </Navigation>
     </div>
 
     <Navigation to="/cart">

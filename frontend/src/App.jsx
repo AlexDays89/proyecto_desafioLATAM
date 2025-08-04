@@ -10,8 +10,6 @@ import Cart from './pages/Cart';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 import CartProvider from './context/CartProvider';
-import Navbar from './components/navbar';
-import Footer from './components/footer';
 
 function App() {
   return (

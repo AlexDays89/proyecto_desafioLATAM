@@ -23,13 +23,6 @@ li div {
   text-align: center;
 }
 
-.imagenpizza {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
 .cantidad {
   display: flex;
   justify-content: center;

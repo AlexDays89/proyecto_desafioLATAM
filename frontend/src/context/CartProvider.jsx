@@ -7,14 +7,14 @@ const CartProvider = ({ children }) => {
         return cart.reduce((total, { price, count }) => total + price * count, 0);
     };
 
-    const [pizzas, setPizzas] = useState([]);
+    const [productos, setProductos] = useState([]);
 
     const consultarApi = async () => {
         try {
-            const url = "http://localhost:5000/api/pizzas";
+            const url = "http://localhost:3000/api/productos";
             const res = await fetch(url);
             const data = await res.json();
-            setPizzas(data);
+            setProductos(data);
         } catch (error) {
             console.error("Error al consultar la API", error);
         }
@@ -26,15 +26,15 @@ const CartProvider = ({ children }) => {
 
     const handleAdd = (id) => {
         setCart((prevCart) => {
-            const pizzaInCart = prevCart.find((p) => p.id === id);
-            if (pizzaInCart) {
+            const productoInCart = prevCart.find((p) => p.id === id);
+            if (productoInCart) {
                 return prevCart.map((p) =>
                     p.id === id ? { ...p, count: p.count + 1 } : p
                 );
             } else {
-                const newPizza = pizzas.find((p) => p.id === id);
-                if (newPizza) {
-                    const { id, name, price, img } = newPizza;
+                const newProducto = productos.find((p) => p.id === id);
+                if (newProducto) {
+                    const { id, name, price, img } = newProducto;
                     return [...prevCart, { id, name, price, img, count: 1 }];
                 }
             }
@@ -45,16 +45,16 @@ const CartProvider = ({ children }) => {
     const handleRemove = (id) => {
         setCart((prevCart) =>
             prevCart
-                .map((pizza) =>
-                    pizza.id === id ? { ...pizza, count: pizza.count - 1 } : pizza
+                .map((producto) =>
+                    producto.id === id ? { ...producto, count: producto.count - 1 } : producto
                 )
-                .filter((pizza) => pizza.count > 0)
+                .filter((producto) => producto.count > 0)
         );
     };
 
     return (
         <CartContext.Provider
-            value={{ cart, pizzas, consultarApi, handleAdd, handleRemove, calcularTotal }}
+            value={{ cart, productos, consultarApi, handleAdd, handleRemove, calcularTotal }}
         >
             {children}
         </CartContext.Provider>

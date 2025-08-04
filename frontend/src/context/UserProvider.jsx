@@ -12,9 +12,9 @@ const UserProvider = ({ children }) => {
 
 export const UserValidated = ({ children }) => {
     const [user, setUser] = useState({
-        username: "alejandrodiaz@gmail.com",
-        displayName: "Alejandro Diaz",
-        password: "123456",
+        username: "Usuario",
+        displayName: "Usuario",
+        password: "*******",
     });
     return (
         <UserContext.Provider value={{ user, setUser }}>

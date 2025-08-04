@@ -2,6 +2,8 @@ import { InputText } from 'primereact/inputtext';
 import React, { useState } from "react";
 import '../assets/styles/register.css';
 import Boton from '../components/boton';
+import Navbar from '../components/navbar';
+import Footer from '../components/footer';
 
 const Register = ({ onRegisterSuccess }) => {
   const [username, setUsername] = useState('');
@@ -40,7 +42,9 @@ const Register = ({ onRegisterSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="contenedor-login">
+    <>
+    <Navbar className="navbar" />
+    <form onSubmit={handleSubmit} className="contenedor-register">
       <h1>REGISTRO</h1>
 
       <div className="input p-field p-fluid">
@@ -83,6 +87,8 @@ const Register = ({ onRegisterSuccess }) => {
         <div className="alert alert-success">{mensaje}</div>
       )}
     </form>
+    <Footer />
+    </>
   );
 };
 

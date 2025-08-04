@@ -2,6 +2,8 @@ import { InputText } from 'primereact/inputtext';
 import React, { useState } from "react";
 import '../assets/styles/login.css';
 import Boton from '../components/boton';
+import Navbar from '../components/navbar';
+import Footer from '../components/footer';
 
 const Login = ({ onLoginSuccess }) => {
     const [username, setUsername] = useState('');
@@ -33,6 +35,8 @@ const Login = ({ onLoginSuccess }) => {
 };
 
 return (
+    <>
+    <Navbar className="navbar" />
     <form onSubmit={handleSubmit} className="contenedor-login">
     <h1>LOG-IN</h1>
 
@@ -65,6 +69,8 @@ return (
         <div className="alert alert-success">{mensaje}</div>
     )}
     </form>
+    <Footer />
+    </>
 );
 };
 
