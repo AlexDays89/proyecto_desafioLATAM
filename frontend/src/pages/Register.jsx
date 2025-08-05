@@ -1,6 +1,5 @@
 import { InputText } from 'primereact/inputtext';
 import React, { useState } from "react";
-import '../assets/styles/register.css';
 import Boton from '../components/boton';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
@@ -43,7 +42,8 @@ const Register = ({ onRegisterSuccess }) => {
 
   return (
     <>
-    <Navbar className="navbar" />
+    <div className="contenedor-home">
+    <Navbar />
     <form onSubmit={handleSubmit} className="contenedor-register">
       <h1>REGISTRO</h1>
 
@@ -88,6 +88,7 @@ const Register = ({ onRegisterSuccess }) => {
       )}
     </form>
     <Footer />
+    </div>
     </>
   );
 };

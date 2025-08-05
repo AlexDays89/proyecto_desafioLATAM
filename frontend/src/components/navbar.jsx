@@ -1,4 +1,3 @@
-import '../assets/styles/navbar.css'
 import Navigation from './navigation';
 import { useContext } from 'react';
 import Boton from './boton';

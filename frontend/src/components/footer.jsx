@@ -1,9 +1,7 @@
-import '../assets/styles/footer.css'
-
 function Footer() {
     return (
         <div className="footer">
-            <p>Footer</p>
+            <p>Todos los derechos reservados</p>
         </div>
     )
 }

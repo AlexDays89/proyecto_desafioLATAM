@@ -1,6 +1,5 @@
 import Navigation from '../components/navigation';
 import Boton from '../components/boton';
-import '../assets/styles/notFound.css';
 
 function NotFound() {
   return (

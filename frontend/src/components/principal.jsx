@@ -1,5 +1,3 @@
-import '../assets/styles/principal.css'
-
 function Principal() {
     return (
         <div className="principal">

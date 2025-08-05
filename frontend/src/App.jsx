@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import './assets/styles/App.css'
 import Home from './pages/Home'
 import UserProvider from './context/UserProvider';
 import { UserContext } from './context/UserContext';
@@ -10,6 +9,7 @@ import Cart from './pages/Cart';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 import CartProvider from './context/CartProvider';
+import './assets/styles/App.css'
 
 function App() {
   return (
