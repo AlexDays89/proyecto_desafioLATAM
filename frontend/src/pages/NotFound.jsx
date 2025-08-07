@@ -9,7 +9,7 @@ function NotFound() {
         <Navigation to="/">
             <Boton
             variante="outline-dark text-dark"
-            texto={<>Volver a la página principall</>}
+            texto={<>Volver a la página principal</>}
             />
           </Navigation>
     </main>
