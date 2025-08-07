@@ -8,6 +8,8 @@ import Login from './pages/Login';
 import Cart from './pages/Cart';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
+import Productos from './pages/Productos';
+import Contacto from './pages/Contacto';
 import CartProvider from './context/CartProvider';
 import './assets/styles/App.css'
 
@@ -34,6 +36,10 @@ function AppComponent() {
                 element={<Home/>}
               />
               <Route
+                path="/productos"
+                element={<Productos/>}
+              />
+              <Route
                 path="/register"
                 element={token ? <Navigate to="/" /> : <Register onRegisterSuccess={handleLogin} />}
               />
@@ -48,6 +54,10 @@ function AppComponent() {
               <Route
                 path="/profile"
                 element={token ? <Profile onLogout={handleLogout}/> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/contacto"
+                element={<Contacto/>}
               />
               <Route
               path="*"

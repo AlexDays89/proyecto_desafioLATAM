@@ -5,9 +5,14 @@ import { useCart } from '../context/useCart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faLockOpen, faLock } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../context/UserContext';
+import { SplitButton } from 'primereact/splitbutton';
+import categorias from '../data/categorias';
+import { useNavigate } from 'react-router-dom';
+
 
 const Navbar = () => {
 const { token, setToken} = useContext(UserContext);
+const navigate = useNavigate();
 const handleLogout = () => { setToken(false);};
 const { calcularTotal } = useCart();
 const total = calcularTotal();
@@ -18,31 +23,34 @@ return (
             <p className="fw-bold">LOGO</p>
         
         <Navigation to="/">
-            <Boton
-            className = "boton"
-            variante="outline-light text-light bg-dark"
+          <Boton
+            severity="secondary" rounded raised outlined
             texto="Home"
-            />
+          />
         </Navigation>
 
-        <Navigation to="/">
-            <Boton
-            className = "boton"
-            variante="outline-light text-light bg-dark"
-            texto="Tienda"
-            />
-        </Navigation>
+        {/* SplitButton de PrimeReact para categorías bajo 'Tienda' */}
+        <SplitButton
+          label="Tienda"
+          onClick={() => navigate('/productos')}
+          model={categorias.map(cat => ({
+            label: cat.nombre,
+            command: () => navigate(`/productos?categoria=${encodeURIComponent(cat.nombre)}`)
+          }))}
+          className="p-button-secondary p-button-raised p-button-outlined mx-2"
+          appendTo="self"
+        />
 
         {token ? (
-            <>
+          <>
             <Navigation to="/profile">
-            <Boton
-                variante="outline-light text-light bg-dark"
+              <Boton
+                severity="secondary" rounded raised outlined
                 texto={<><FontAwesomeIcon icon={faLockOpen} /> Profile</>}
             />
             </Navigation>
             <Boton
-            variante="outline-light text-light bg-dark"
+            severity="secondary" rounded raised outlined
             texto={<><FontAwesomeIcon icon={faLockOpen} /> Logout</>}
             onClick={handleLogout}
             />
@@ -51,23 +59,22 @@ return (
             <>
             <Navigation to="/login">
             <Boton
-                variante="outline-light text-light bg-dark"
+                severity="secondary" rounded raised outlined
                 texto={<><FontAwesomeIcon icon={faLock} /> Login</>}
             />
             </Navigation>
             <Navigation to="/register">
             <Boton
-                variante="outline-light text-light bg-dark"
+                severity="secondary" rounded raised outlined
                 texto={<><FontAwesomeIcon icon={faLock} /> Registro</>}
             />
             </Navigation>
             </>
         )}
 
-        <Navigation to="/">
+        <Navigation to="/contacto">
             <Boton
-            className = "boton"
-            variante="outline-light text-light bg-dark"
+            severity="secondary" rounded raised outlined
             texto="Contacto"
             />
         </Navigation>
@@ -75,7 +82,7 @@ return (
 
     <Navigation to="/cart">
         <Boton
-            variante="outline-light text-light bg-dark"
+            severity="secondary" rounded raised outlined
             texto={<><FontAwesomeIcon icon={faShoppingCart} /> Total: ${total.toLocaleString()}</>}
         />
     </Navigation>

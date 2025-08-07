@@ -3,13 +3,15 @@ import '../assets/styles/cart.css';
 import Boton from '../components/boton';
 import { useCart } from '../context/useCart';
 import { UserContext } from '../context/UserContext';
+import Navbar from '../components/navbar';
+import Footer from '../components/footer';
 
 const Cart = () => {
   const { token } = useContext(UserContext);
   const { calcularTotal, handleAdd, handleRemove, cart } = useCart();
   const total = calcularTotal();
 
-  // Renderiza un ítem del carrito
+
   const renderCartItem = ({ id, name, price, count, img }) => (
     <li key={id} className="cart-item">
       <div>
@@ -22,14 +24,16 @@ const Cart = () => {
         <p>${price.toLocaleString()}</p>
       </div>
       <div className="cantidad">
-        <Boton variante="outline-dark" texto="-" onClick={() => handleRemove(id)} />
+        <Boton severity="secondary" rounded raised outlined texto="-" onClick={() => handleRemove(id)} />
         <p className="mx-2">{count}</p>
-        <Boton variante="outline-dark" texto="+" onClick={() => handleAdd(id)} />
+        <Boton severity="secondary" rounded raised outlined texto="+" onClick={() => handleAdd(id)} />
       </div>
     </li>
   );
 
   return (
+    <div className="contenedor-home">
+      <Navbar />
     <div className="carrito">
       <h1>Detalles del pedido</h1>
       <ul className="cart-list">
@@ -39,12 +43,14 @@ const Cart = () => {
         <h3>Total: ${total.toLocaleString()}</h3>
         <div className="botondepago">
           <Boton
-            variante={token ? "outline-dark" : "outline-dark disabled"}
+            severity="secondary" rounded raised outlined
             texto="Pagar"
             disabled={!token}
           />
         </div>
       </div>
+    </div>
+    <Footer />
     </div>
   );
 };

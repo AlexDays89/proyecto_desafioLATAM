@@ -105,3 +105,91 @@
     border-radius: 5px;
     box-sizing: border-box;
 }
+
+.p-splitbutton .p-menu .p-menuitem-content {
+    display: flex;
+    justify-content: center;
+}
+
+.p-splitbutton .p-menu .p-tieredmenu-root-list {
+    padding-left: 1.5rem !important;
+    margin-left: 0 !important;
+    list-style: none;
+}
+
+.p-splitbutton .p-menu {
+    left: 0 !important;
+    right: auto !important;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+.p-splitbutton .p-menu .p-menuitem-link {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    border-left: none !important;
+    border-right: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.p-splitbutton .p-menu .p-menuitem-separator {
+    margin: 0;
+    width: 100%;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+.imagenProducto {
+    width: 100%;
+    height: auto
+}
+
+.imgCard {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.card-custom {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 350px;
+    width: 320px;
+}
+
+.bodyCard{
+    flex: 1 1 30%;
+    height: 30%;
+    min-height: 30%;
+    max-height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+
+}
+
+.card-img-container {
+    flex: 0 0 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    max-height: 70%;
+    background: #fff;
+}
+
+.card-title,
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* o usa line-clamp para varias líneas */
+}
