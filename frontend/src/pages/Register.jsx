@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Boton from '../components/boton';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 
 const Register = ({ onRegisterSuccess }) => {
   const [username, setUsername] = useState('');
@@ -44,49 +46,63 @@ const Register = ({ onRegisterSuccess }) => {
     <>
     <div className="contenedor-home">
     <Navbar />
-    <form onSubmit={handleSubmit} className="contenedor-register">
-      <h1>REGISTRO</h1>
+    {/* Seccion principal de registro con fondo animado */}
+    <section className="register-section">
+      <div className="register-box">
+        <h2>REGISTRO</h2>
+        <form onSubmit={handleSubmit}>
+          {/* Campo de email con icono y label flotante */}
+          <div className="input-box">
+            <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
+            <InputText
+              type="email"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+            <label htmlFor="username">Email</label>
+          </div>
 
-      <div className="input p-field p-fluid">
-        <label htmlFor="username">e-Mail</label>
-        <InputText
-          placeholder="Introduce tu e-Mail"
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+          {/* Campo de contraseña con icono y label flotante */}
+          <div className="input-box">
+            <FontAwesomeIcon icon={faLock} className="input-icon" />
+            <InputText
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <label htmlFor="password">Contraseña</label>
+          </div>
+
+          {/* Campo de confirmar contraseña con icono y label flotante */}
+          <div className="input-box">
+            <FontAwesomeIcon icon={faLock} className="input-icon" />
+            <InputText
+              type="password"
+              id="confirmarpassword"
+              value={confirmarpassword}
+              onChange={(e) => setConfirmarpassword(e.target.value)}
+              required
+            />
+            <label htmlFor="confirmarpassword">Confirmar Contraseña</label>
+          </div>
+
+          {/* Boton de registro */}
+          <button type="submit" className="register-btn">
+            Registrarse
+          </button>
+
+          {/* Mensajes de error y exito */}
+          {error && <div className="alert alert-danger">{mensaje}</div>}
+          {!error && mensaje && (
+            <div className="alert alert-success">{mensaje}</div>
+          )}
+        </form>
       </div>
-
-      <div className="input p-field p-fluid">
-        <label htmlFor="password">Password</label>
-        <InputText
-          placeholder="Contraseña"
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-
-      <div className="input p-field p-fluid">
-        <label htmlFor="confirmarpassword">Confirmar Password</label>
-        <InputText
-          placeholder="Confirmar Contraseña"
-          type="password"
-          id="confirmarpassword"
-          value={confirmarpassword}
-          onChange={(e) => setConfirmarpassword(e.target.value)}
-        />
-      </div>
-
-      <Boton variante="outline-dark text-dark" texto="Registro" type="submit" size="lg" />
-
-      {error && <div className="alert alert-danger">{mensaje}</div>}
-      {!error && mensaje && (
-        <div className="alert alert-success">{mensaje}</div>
-      )}
-    </form>
+    </section>
     <Footer />
     </div>
     </>

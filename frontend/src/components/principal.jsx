@@ -1,11 +1,28 @@
 import productos from '../data/productos';
 import { Carousel } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function Principal() {
+    const navigate = useNavigate();
+
+    const handleVerDetalles = (productoId) => {
+        navigate(`/producto/${productoId}`);
+    };
+
     return (
         <div className="principal">
             {/* Sección Hero - Título principal y descripción de servicios */}
-            <div className="container-fluid py-5 mb-4" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+            <div className="container-fluid mb-4" style={{ 
+                backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.51)), url("/img/herobg.jpg")',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                height: 'calc(100vh - 130px)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'relative'
+            }}>
                 <div className="container text-center text-white">
                     <h1 className="display-4 fw-bold mb-3">Bienvenido a Nuestro Mundo Místico</h1>
                     <p className="lead mb-4">Descubre los secretos del universo a través de nuestras lecturas de tarot y servicios energéticos especializados</p>
@@ -14,6 +31,10 @@ function Principal() {
                             <p className="fs-5">Conectamos contigo para brindarte claridad, orientación y respuestas a través de la sabiduría ancestral del tarot</p>
                         </div>
                     </div>
+                </div>
+                {/* Arrow scroll down animado */}
+                <div className="scroll-arrow">
+                    <i className="fas fa-chevron-down"></i>
                 </div>
             </div>
 
@@ -81,9 +102,9 @@ function Principal() {
                                 <div className="col-md-6 col-lg-4">
                                     <div className="card h-100 shadow border-0 mx-auto" style={{ maxWidth: '350px' }}>
                                         <div className="card-img-container" style={{ height: '250px', overflow: 'hidden' }}>
-                                            <img 
-                                                className="d-block w-100 h-100" 
-                                                src={producto.img} 
+                                            <img
+                                                className="d-block w-100 h-100"
+                                                src={producto.img}
                                                 alt={producto.name}
                                                 style={{ objectFit: 'cover' }}
                                             />
@@ -97,6 +118,7 @@ function Principal() {
                                             <button 
                                                 className="btn btn-lg px-4 py-2" 
                                                 style={{ backgroundColor: '#667eea', borderColor: '#667eea', color: 'white' }}
+                                                onClick={() => producto.price === 0 ? null : handleVerDetalles(producto.id)}
                                             >
                                                 {producto.price === 0 ? 'Consultar' : 'Ver Detalles'}
                                             </button>
@@ -108,14 +130,46 @@ function Principal() {
                     ))}
                 </Carousel>
             </div>
-
+            {/* Sección Acerca de */}
+            <div className="container my-5" id="acerca-de">
+                <h2 className="text-center fw-bold mb-5" style={{ color: '#764ba2' }}>Acerca de:</h2>
+                <div className="row align-items-center">
+                    <div className="col-md-6">
+                        <img
+                            src="/img/acerca_de.jpeg"
+                            alt="Acerca de nosotros"
+                            className="img-fluid rounded shadow w-50px h-auto"
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <p className="lead">
+                            Ariana es una Tarotista y Medium muy conocida en el mundo esoterico nacional e internacional, pero no se habla mucho de ella ya que quiere mantener un perfil bajo.<br/><br/>
+                            Ella dice que, en su fasceta como Medium, "lo hace mas que nada para ayudar, porque lo que regala Dios es para el binestar de sus hijos". Es por eso que, incluso Mediums, Clarividentes y tarotistas de renombre dentro del circuito espiritual, han solicitado
+                            sus servicios, para aconsejarlos y ayudar en lo que le soliciten, reconociendo con esto ultimo, sus gran capacidad y dedicacion a la ayuda de todos sus pacientes.
+                        </p>
+                    </div>
+                </div>
+            </div>
             {/* Sección Tipos de Tarot */}
-            <div className="container my-5">
+            <div className="container my-5" id="tipos-de-tarot">
                 <h2 className="text-center mb-5 fw-bold" style={{ color: '#764ba2' }}>Nuestros Tipos de Tarot</h2>
                 <div className="row g-4">
                     {/* Tarot Egipcio */}
                     <div className="col-md-4">
                         <div className="card h-100 shadow-sm border-0" style={{ borderTop: '4px solid #d4af37' }}>
+                            {/* Imagen del Tarot Egipcio */}
+                            <div style={{ height: '200px', width: '100%', overflow: 'hidden', backgroundColor: '#f8f9fa' }}>
+                                <img 
+                                    src="/img/tipos_tarot/tarot_egipcio.jpg" 
+                                    alt="Tarot Egipcio" 
+                                    style={{ 
+                                        width: '100%', 
+                                        height: '100%', 
+                                        objectFit: 'contain', 
+                                        borderRadius: '8px 8px 0 0' 
+                                    }}
+                                />
+                            </div>
                             <div className="card-body text-center p-4">
                                 <div className="mb-3">
                                     <i className="fas fa-ankh" style={{ fontSize: '3rem', color: '#d4af37' }}></i>
@@ -129,6 +183,19 @@ function Principal() {
                     {/* Tarot Español */}
                     <div className="col-md-4">
                         <div className="card h-100 shadow-sm border-0" style={{ borderTop: '4px solid #c9302c' }}>
+                            {/* Imagen del Tarot Español */}
+                            <div style={{ height: '200px', width: '100%', overflow: 'hidden', backgroundColor: '#f8f9fa' }}>
+                                <img 
+                                    src="/img/tipos_tarot/tarot_espanol.jpg" 
+                                    alt="Tarot Español" 
+                                    style={{ 
+                                        width: '100%', 
+                                        height: '100%', 
+                                        objectFit: 'contain', 
+                                        borderRadius: '8px 8px 0 0' 
+                                    }}
+                                />
+                            </div>
                             <div className="card-body text-center p-4">
                                 <div className="mb-3">
                                     <i className="fas fa-crown" style={{ fontSize: '3rem', color: '#c9302c' }}></i>
@@ -142,6 +209,19 @@ function Principal() {
                     {/* Tarot Rider-Waite */}
                     <div className="col-md-4">
                         <div className="card h-100 shadow-sm border-0" style={{ borderTop: '4px solid #5cb85c' }}>
+                            {/* Imagen del Tarot Rider-Waite */}
+                            <div style={{ height: '200px', width: '100%', overflow: 'hidden', backgroundColor: '#f8f9fa' }}>
+                                <img 
+                                    src="/img/tipos_tarot/tarot_rider.jpg" 
+                                    alt="Tarot Rider-Waite" 
+                                    style={{ 
+                                        width: '100%', 
+                                        height: '100%', 
+                                        objectFit: 'contain', 
+                                        borderRadius: '8px 8px 0 0' 
+                                    }}
+                                />
+                            </div>
                             <div className="card-body text-center p-4">
                                 <div className="mb-3">
                                     <i className="fas fa-eye" style={{ fontSize: '3rem', color: '#5cb85c' }}></i>
@@ -155,7 +235,7 @@ function Principal() {
             </div>
 
             {/* Sección Tipos de Lectura */}
-            <div className="container-fluid py-5" style={{ backgroundColor: '#f8f9fa' }}>
+            <div className="container-fluid py-5" id="tipos-de-lectura" style={{ backgroundColor: '#f8f9fa' }}>
                 <div className="container">
                     <h2 className="text-center mb-5 fw-bold" style={{ color: '#764ba2' }}>Tipos de Consulta</h2>
                     <div className="row g-4">

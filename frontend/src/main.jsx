@@ -9,6 +9,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'primereact/resources/themes/lara-light-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
+// FontAwesome CSS para iconos
+import '@fortawesome/fontawesome-free/css/all.min.css';
+// Importar efecto de cursor personalizado
+import './cursorEffect.js';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <StrictMode>

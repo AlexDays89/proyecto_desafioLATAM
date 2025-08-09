@@ -9,6 +9,7 @@ import Cart from './pages/Cart';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 import Productos from './pages/Productos';
+import Producto from './pages/producto';
 import Contacto from './pages/Contacto';
 import CartProvider from './context/CartProvider';
 import './assets/styles/App.css'
@@ -38,6 +39,10 @@ function AppComponent() {
               <Route
                 path="/productos"
                 element={<Productos/>}
+              />
+              <Route
+                path="/producto/:id"
+                element={<Producto/>}
               />
               <Route
                 path="/register"

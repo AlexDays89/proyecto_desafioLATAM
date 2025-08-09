@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Boton from '../components/boton';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 
 const Login = ({ onLoginSuccess }) => {
     const [username, setUsername] = useState('');
@@ -35,42 +37,62 @@ const Login = ({ onLoginSuccess }) => {
 
 return (
     <>
-    <div className="contenedor-home">
     <Navbar />
-    <form onSubmit={handleSubmit} className="contenedor-login">
-    <h1>LOG-IN</h1>
+    <section className="login-section">
+        <div className="login-box">
+            <form onSubmit={handleSubmit}>
+                <h2>LOGIN</h2>
+                
+                <div className="input-box">
+                    <span className="icon">
+                        <FontAwesomeIcon icon={faEnvelope} />
+                    </span>
+                    <input
+                        type="email"
+                        id="username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+                    <label htmlFor="username">Email</label>
+                </div>
 
-    <div className="input p-field p-fluid">
-        <label htmlFor="username">e-Mail</label>
-        <InputText
-            placeholder="Introduce tu e-Mail"
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-        />
-    </div>
+                <div className="input-box">
+                    <span className="icon">
+                        <FontAwesomeIcon icon={faLock} />
+                    </span>
+                    <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <label htmlFor="password">Password</label>
+                </div>
 
-    <div className="input p-field p-fluid">
-        <label htmlFor="password">Password</label>
-        <InputText
-            placeholder="Contraseña"
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-        />
-    </div>
+                <div className="remember-forget">
+                    <label>
+                        <input type="checkbox" />
+                        Recordarme
+                    </label>
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                </div>
 
-    <Boton variante="outline-dark text-dark" texto="Login" type="submit" size="lg" />
+                <button type="submit">Login</button>
 
-    {error && <div className="alert alert-danger">{mensaje}</div>}
-    {!error && mensaje && (
-        <div className="alert alert-success">{mensaje}</div>
-    )}
-    </form>
+                <div className="register-link">
+                    <p>¿No tienes una cuenta? <a href="/register">Regístrate</a></p>
+                </div>
+
+                {error && <div className="alert alert-danger">{mensaje}</div>}
+                {!error && mensaje && (
+                    <div className="alert alert-success">{mensaje}</div>
+                )}
+            </form>
+        </div>
+    </section>
     <Footer />
-    </div>
     </>
 );
 };

@@ -1,15 +1,25 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import CardProducto from "./cardproducto";
 import productosInicial from "../data/productos";
 import { Container, Row, Col, Dropdown, DropdownButton, Form, Button } from "react-bootstrap";
 import { useCart } from "../context/useCart";
+import { useSearchParams } from "react-router-dom";
 
 
 const VistaProductos = () => {
+  const [searchParams] = useSearchParams();
   const categoriasUnicas = useMemo(() => ["Todos", ...Array.from(new Set(productosInicial.map(p => p.category)))], []);
   const [categoria, setCategoria] = useState("Todos");
   const [precioMin, setPrecioMin] = useState(0);
   const [precioMax, setPrecioMax] = useState(20000000);
+  
+  // Efecto para leer parametros de URL y establecer categoria inicial
+  useEffect(() => {
+    const categoriaParam = searchParams.get('categoria');
+    if (categoriaParam && categoriasUnicas.includes(categoriaParam)) {
+      setCategoria(categoriaParam);
+    }
+  }, [searchParams, categoriasUnicas]);
   const precioInicial = () => {
     setPrecioMin(0);
     setPrecioMax(20000000);
@@ -62,7 +72,7 @@ const VistaProductos = () => {
       </Form>
       <Row>
         {productosFiltrados.map(producto => (
-          <Col key={producto.id} xs={12} md={6} lg={3} className="mb-4">
+          <Col key={producto.id} xs={12} md={6} lg={4} className="mb-4">
             <CardProducto {...producto} onAdd={handleAdd} />
           </Col>
         ))}

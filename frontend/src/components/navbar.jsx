@@ -17,11 +17,46 @@ const handleLogout = () => { setToken(false);};
 const { calcularTotal } = useCart();
 const total = calcularTotal();
 
+// Función para hacer scroll suave a las secciones
+const scrollToSection = (sectionId) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+};
+
+// Items del menú de navegación interna
+const menuItems = [
+  {
+    label: 'Acerca de',
+    command: () => {
+      navigate('/');
+      setTimeout(() => scrollToSection('acerca-de'), 100);
+    }
+  },
+  {
+    label: 'Nuestros Tipos de Tarot',
+    command: () => {
+      navigate('/');
+      setTimeout(() => scrollToSection('tipos-de-tarot'), 100);
+    }
+  },
+  {
+    label: 'Tipos de Consulta',
+    command: () => {
+      navigate('/');
+      setTimeout(() => scrollToSection('tipos-de-lectura'), 100);
+    }
+  }
+];
+
 return (
     <nav className="navbar d-flex justify-content-between align-items-center px-3 px-md-5">
         <div className="links d-flex gap-3 align-items-center">
-            <p className="fw-bold">LOGO</p>
-        
+          <img src="/img/logo.png" alt="logo" className="logo"/>
         <Navigation to="/">
           <Boton
             severity="secondary" rounded raised outlined
@@ -29,7 +64,21 @@ return (
           />
         </Navigation>
 
-        {/* SplitButton de PrimeReact para categorías bajo 'Tienda' */}
+        {/* SplitButton de PrimeReact para navegación interna */}
+        <SplitButton
+          label="Menu"
+          onClick={() => navigate('/')}
+          model={menuItems}
+          className="p-button-secondary p-button-raised p-button-outlined mx-2"
+          appendTo="self"
+        />
+        <Navigation to="/contacto">
+          <Boton
+            severity="secondary" rounded raised outlined
+            texto="Contacto"
+          />
+        </Navigation>
+
         <SplitButton
           label="Tienda"
           onClick={() => navigate('/productos')}
@@ -71,13 +120,6 @@ return (
             </Navigation>
             </>
         )}
-
-        <Navigation to="/contacto">
-            <Boton
-            severity="secondary" rounded raised outlined
-            texto="Contacto"
-            />
-        </Navigation>
     </div>
 
     <Navigation to="/cart">
