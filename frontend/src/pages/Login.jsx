@@ -1,16 +1,18 @@
-import { InputText } from 'primereact/inputtext';
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Boton from '../components/boton';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import usuarios from '../data/usuarios';
+import { UserContext } from '../context/UserContext';
 
 const Login = ({ onLoginSuccess }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
     const [mensaje, setMensaje] = useState('');
+    const { setUser } = useContext(UserContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,12 +29,24 @@ const Login = ({ onLoginSuccess }) => {
         return;
     }
 
-    setError(false);
-    setMensaje('Ingreso Exitoso');
+    const usuarioEncontrado = usuarios.find(
+        (usuario) => usuario.username === username && usuario.password === password
+    );
 
-    setTimeout(() => {
-        onLoginSuccess();
-    }, 2000);
+    if (!usuarioEncontrado) {
+        setError(true);
+        setMensaje('Usuario o contraseña incorrectos');
+        return;
+    }
+
+    if (usuarioEncontrado) {
+        setUser(usuarioEncontrado); // <-- setUser viene de tu UserContext
+        setError(false);
+        setMensaje('Ingreso Exitoso');
+        setTimeout(() => {
+            onLoginSuccess();
+        }, 2000);
+    }
 };
 
 return (
@@ -79,7 +93,11 @@ return (
                     <a href="#">¿Olvidaste tu contraseña?</a>
                 </div>
 
-                <button type="submit">Login</button>
+                <Boton
+                    texto="Login"
+                    onClick={handleSubmit}
+                    variante="outline-dark text-dark mt-4"
+                />
 
                 <div className="register-link">
                     <p>¿No tienes una cuenta? <a href="/register">Regístrate</a></p>
@@ -94,7 +112,7 @@ return (
     </section>
     <Footer />
     </>
-);
-};
+    );
+}
 
 export default Login;

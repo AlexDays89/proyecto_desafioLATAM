@@ -6,8 +6,9 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 
 function Profile() {
-    const {  setToken } = useContext(UserContext);
-    const handleLogout = () => { setToken(false);};
+    const { setToken, } = useContext(UserContext);
+    const handleLogout = () => { setToken(false);}
+    const { user } = useContext(UserContext);
 
     return (
     <div className="contenedor-home">
@@ -19,7 +20,12 @@ function Profile() {
                         <div className="mb-3">
                         <label htmlFor="exampleFormControlInput1" className="form-label mb-4">Datos de usuario</label>
                             <p className="mb-0">Email</p>
-                            <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="nombredeusuario@gmail.com" disabled />
+                            <input 
+                            type="email" 
+                            className="form-control" 
+                            id="exampleFormControlInput1"
+                            value={user?.username || "Usuario"}
+                            placeholder="" disabled />
                         </div>
                         <Navigation to="/">
                             <Boton

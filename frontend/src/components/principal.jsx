@@ -1,28 +1,14 @@
-import productos from '../data/productos';
-import { Carousel } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import Acciones from './acciones';
+import '../assets/styles/principal.css';
+import TiposTarot from './tipostarot';
+import Carrusel from './carrusel';
 
 function Principal() {
-    const navigate = useNavigate();
-
-    const handleVerDetalles = (productoId) => {
-        navigate(`/producto/${productoId}`);
-    };
 
     return (
         <div className="principal">
             {/* Sección Hero - Título principal y descripción de servicios */}
-            <div className="container-fluid mb-4" style={{ 
-                backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.51)), url("/img/herobg.jpg")',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                height: 'calc(100vh - 130px)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                position: 'relative'
-            }}>
+            <div className="container-fluid mb-4 contenedor-hero">
                 <div className="container text-center text-white">
                     <h1 className="display-4 fw-bold mb-3">Bienvenido a Nuestro Mundo Místico</h1>
                     <p className="lead mb-4">Descubre los secretos del universo a través de nuestras lecturas de tarot y servicios energéticos especializados</p>
@@ -34,102 +20,12 @@ function Principal() {
                 </div>
                 {/* Arrow scroll down animado */}
                 <div className="scroll-arrow">
-                    <i className="fas fa-chevron-down"></i>
+                    <i className="fas fa-chevron-down" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}></i>
                 </div>
             </div>
-
             {/* Carrusel de Productos - Muestra los servicios disponibles */}
-            <div className="container my-5">
-                <h2 className="text-center mb-4 fw-bold" style={{ color: '#764ba2' }}>Nuestros Servicios</h2>
-                <style>
-                    {`
-                        .product-carousel .carousel-control-prev,
-                        .product-carousel .carousel-control-next {
-                            background-color: rgba(118, 75, 162, 0.8);
-                            border-radius: 50%;
-                            width: 50px;
-                            height: 50px;
-                            top: 50%;
-                            transform: translateY(-50%);
-                            opacity: 0.8;
-                            transition: all 0.3s ease;
-                        }
-                        
-                        .product-carousel .carousel-control-prev:hover,
-                        .product-carousel .carousel-control-next:hover {
-                            background-color: rgba(118, 75, 162, 1);
-                            opacity: 1;
-                            transform: translateY(-50%) scale(1.1);
-                        }
-                        
-                        .product-carousel .carousel-control-prev {
-                            left: -25px;
-                        }
-                        
-                        .product-carousel .carousel-control-next {
-                            right: -25px;
-                        }
-                        
-                        .product-carousel .carousel-control-prev-icon,
-                        .product-carousel .carousel-control-next-icon {
-                            background-size: 20px 20px;
-                            filter: brightness(0) invert(1);
-                        }
-                        
-                        .product-carousel .carousel-indicators {
-                            bottom: -50px;
-                        }
-                        
-                        .product-carousel .carousel-indicators [data-bs-target] {
-                            background-color: #764ba2;
-                            width: 12px;
-                            height: 12px;
-                            border-radius: 50%;
-                            margin: 0 5px;
-                        }
-                    `}
-                </style>
-                <Carousel 
-                    indicators={true} 
-                    controls={true} 
-                    interval={4000}
-                    className="product-carousel"
-                    pause="hover"
-                >
-                    {productos.map((producto) => (
-                        <Carousel.Item key={producto.id}>
-                            <div className="row justify-content-center">
-                                <div className="col-md-6 col-lg-4">
-                                    <div className="card h-100 shadow border-0 mx-auto" style={{ maxWidth: '350px' }}>
-                                        <div className="card-img-container" style={{ height: '250px', overflow: 'hidden' }}>
-                                            <img
-                                                className="d-block w-100 h-100"
-                                                src={producto.img}
-                                                alt={producto.name}
-                                                style={{ objectFit: 'cover' }}
-                                            />
-                                        </div>
-                                        <div className="card-body text-center p-4">
-                                            <h5 className="card-title fw-bold mb-3">{producto.name}</h5>
-                                            <p className="card-text mb-3" style={{ color: '#667eea', fontSize: '1.2rem', fontWeight: 'bold' }}>
-                                                {producto.price === 0 ? 'Precio: Consultar' : `$${producto.price.toLocaleString()}`}
-                                            </p>
-                                            <p className="card-text text-muted">Categoría: {producto.category}</p>
-                                            <button 
-                                                className="btn btn-lg px-4 py-2" 
-                                                style={{ backgroundColor: '#667eea', borderColor: '#667eea', color: 'white' }}
-                                                onClick={() => producto.price === 0 ? null : handleVerDetalles(producto.id)}
-                                            >
-                                                {producto.price === 0 ? 'Consultar' : 'Ver Detalles'}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Carousel.Item>
-                    ))}
-                </Carousel>
-            </div>
+            <Carrusel />
+
             {/* Sección Acerca de */}
             <div className="container my-5" id="acerca-de">
                 <h2 className="text-center fw-bold mb-5" style={{ color: '#764ba2' }}>Acerca de:</h2>
@@ -151,88 +47,7 @@ function Principal() {
                 </div>
             </div>
             {/* Sección Tipos de Tarot */}
-            <div className="container my-5" id="tipos-de-tarot">
-                <h2 className="text-center mb-5 fw-bold" style={{ color: '#764ba2' }}>Nuestros Tipos de Tarot</h2>
-                <div className="row g-4">
-                    {/* Tarot Egipcio */}
-                    <div className="col-md-4">
-                        <div className="card h-100 shadow-sm border-0" style={{ borderTop: '4px solid #d4af37' }}>
-                            {/* Imagen del Tarot Egipcio */}
-                            <div style={{ height: '200px', width: '100%', overflow: 'hidden', backgroundColor: '#f8f9fa' }}>
-                                <img 
-                                    src="/img/tipos_tarot/tarot_egipcio.jpg" 
-                                    alt="Tarot Egipcio" 
-                                    style={{ 
-                                        width: '100%', 
-                                        height: '100%', 
-                                        objectFit: 'contain', 
-                                        borderRadius: '8px 8px 0 0' 
-                                    }}
-                                />
-                            </div>
-                            <div className="card-body text-center p-4">
-                                <div className="mb-3">
-                                    <i className="fas fa-ankh" style={{ fontSize: '3rem', color: '#d4af37' }}></i>
-                                </div>
-                                <h4 className="card-title fw-bold mb-3">Tarot Egipcio</h4>
-                                <p className="card-text">Basado en la sabiduría del antiguo Egipto, incorpora símbolos y deidades de su panteón. Su simbolismo evoca la profunda espiritualidad de esta civilización milenaria.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Tarot Español */}
-                    <div className="col-md-4">
-                        <div className="card h-100 shadow-sm border-0" style={{ borderTop: '4px solid #c9302c' }}>
-                            {/* Imagen del Tarot Español */}
-                            <div style={{ height: '200px', width: '100%', overflow: 'hidden', backgroundColor: '#f8f9fa' }}>
-                                <img 
-                                    src="/img/tipos_tarot/tarot_espanol.jpg" 
-                                    alt="Tarot Español" 
-                                    style={{ 
-                                        width: '100%', 
-                                        height: '100%', 
-                                        objectFit: 'contain', 
-                                        borderRadius: '8px 8px 0 0' 
-                                    }}
-                                />
-                            </div>
-                            <div className="card-body text-center p-4">
-                                <div className="mb-3">
-                                    <i className="fas fa-crown" style={{ fontSize: '3rem', color: '#c9302c' }}></i>
-                                </div>
-                                <h4 className="card-title fw-bold mb-3">Tarot Español</h4>
-                                <p className="card-text">Con raíces en la Italia del siglo XV, originado como juego para la nobleza. Los arcanos mayores adoptaron significado simbólico asociado con prácticas esotéricas.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Tarot Rider-Waite */}
-                    <div className="col-md-4">
-                        <div className="card h-100 shadow-sm border-0" style={{ borderTop: '4px solid #5cb85c' }}>
-                            {/* Imagen del Tarot Rider-Waite */}
-                            <div style={{ height: '200px', width: '100%', overflow: 'hidden', backgroundColor: '#f8f9fa' }}>
-                                <img 
-                                    src="/img/tipos_tarot/tarot_rider.jpg" 
-                                    alt="Tarot Rider-Waite" 
-                                    style={{ 
-                                        width: '100%', 
-                                        height: '100%', 
-                                        objectFit: 'contain', 
-                                        borderRadius: '8px 8px 0 0' 
-                                    }}
-                                />
-                            </div>
-                            <div className="card-body text-center p-4">
-                                <div className="mb-3">
-                                    <i className="fas fa-eye" style={{ fontSize: '3rem', color: '#5cb85c' }}></i>
-                                </div>
-                                <h4 className="card-title fw-bold mb-3">Tarot Rider-Waite</h4>
-                                <p className="card-text">Creado en 1909 por Arthur Edward Waite y Pamela Colman Smith. Revolucionario por incluir escenas detalladas en todos los Arcanos Menores.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <TiposTarot />
 
             {/* Sección Tipos de Lectura */}
             <div className="container-fluid py-5" id="tipos-de-lectura" style={{ backgroundColor: '#f8f9fa' }}>
@@ -288,22 +103,7 @@ function Principal() {
             </div>
 
             {/* Sección Call to Action */}
-            <div className="container my-5">
-                <div className="row justify-content-center">
-                    <div className="col-md-8 text-center">
-                        <h3 className="fw-bold mb-3" style={{ color: '#764ba2' }}>¿Listo para descubrir tu destino?</h3>
-                        <p className="lead mb-4">Explora nuestros servicios y encuentra las respuestas que buscas</p>
-                        <div className="d-flex justify-content-center gap-3 flex-wrap">
-                            <button className="btn btn-lg px-4 py-2" style={{ backgroundColor: '#667eea', borderColor: '#667eea', color: 'white' }}>
-                                Ver Productos
-                            </button>
-                            <button className="btn btn-outline-secondary btn-lg px-4 py-2">
-                                Contactar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Acciones />
         </div>
     )
 }

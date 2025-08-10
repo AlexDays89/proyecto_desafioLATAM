@@ -640,23 +640,12 @@ body {
 }
 
 /* Estilos para SplitButton de PrimeReact en el navbar con color dorado */
-.navbar .p-splitbutton .p-button {
-    background-color: #D4A574 !important;
-    border-color: #D4A574 !important;
-    color: #ffffff !important;
-}
 
-.navbar .p-splitbutton .p-button:hover {
-    background-color: #C8860D !important;
-    border-color: #C8860D !important;
-    color: #ffffff !important;
-}
 
 .navbar .p-splitbutton .p-button:focus,
 .navbar .p-splitbutton .p-button:active {
     background-color: #D4A574 !important;
     border-color: #D4A574 !important;
-    color: #ffffff !important;
     box-shadow: 0 0 0 0.2rem rgba(212, 165, 116, 0.25) !important;
 }
 
@@ -925,4 +914,17 @@ body {
   60% {
     transform: translateX(-50%) translateY(-5px);
   }
+}
+
+.contenedor-hero{
+    background-position: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.51));
+    background-Size: cover;
+    background-Position: center;
+    background-Repeat: no-repeat;
+    height: calc(100vh - 130px);
+    display: flex;
+    align-Items: center;
+    justify-Content: center;
+    position: relative;
+    background-image: url('/img/herobg.jpg');
 }

@@ -13,6 +13,7 @@ import Producto from './pages/producto';
 import Contacto from './pages/Contacto';
 import CartProvider from './context/CartProvider';
 import './assets/styles/App.css'
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -59,6 +60,10 @@ function AppComponent() {
               <Route
                 path="/profile"
                 element={token ? <Profile onLogout={handleLogout}/> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/administracion"
+                element={<Admin />}  
               />
               <Route
                 path="/contacto"

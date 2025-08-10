@@ -1,0 +1,41 @@
+import barajas from '../data/tiposbarajas';
+import PropTypes from 'prop-types';
+
+
+const TiposTarot = () => {
+    return (
+        <div className="container my-5 tipos-de-tarot">
+            <h2 className="text-center mb-5 fw-bold" style={{ color: '#764ba2' }}>Nuestros Tipos de Tarot</h2>
+            <div className="row g-4">
+                {barajas.map(baraja => (
+                    <div className="col-md-4" key={baraja.id}>
+                        <div className="card h-100 shadow-sm card-baraja" style={{ borderTopColor: baraja.color }}>
+                            <div className="contenedor-img-baraja">
+                                <img 
+                                    src={baraja.img} 
+                                    alt={baraja.name} 
+                                />
+                            </div>
+                            <div className="card-body text-center p-4">
+                            <div className="mb-3">
+                                    <i className={baraja.emoji} style={{ color: baraja.color }}></i>
+                                </div>
+                                <h4 className="card-title fw-bold mb-3">{baraja.name}</h4>
+                                <p className="card-text">{baraja.descripcion}</p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+TiposTarot.propTypes = {
+    id: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    descripcion: PropTypes.string.isRequired
+};
+        
+export default TiposTarot;

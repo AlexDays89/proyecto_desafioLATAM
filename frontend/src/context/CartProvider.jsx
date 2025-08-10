@@ -1,11 +1,11 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { CartContext } from "./CartContext";
 import productosMock from "../data/productos";
 
 const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
     const calcularTotal = () => {
-        return cart.reduce((total, { price, count }) => total + price * count, 0);
+        return cart.reduce((total, { price, stock }) => total + price * stock, 0);
     };
 
     const [productos, setProductos] = useState([]);
@@ -32,13 +32,13 @@ const CartProvider = ({ children }) => {
             const productoInCart = prevCart.find((p) => p.id === id);
             if (productoInCart) {
                 return prevCart.map((p) =>
-                    p.id === id ? { ...p, count: p.count + 1 } : p
+                    p.id === id ? { ...p, stock: p.stock + 1 } : p
                 );
             } else {
                 const newProducto = productos.find((p) => p.id === id);
                 if (newProducto) {
                     const { id, name, price, img } = newProducto;
-                    return [...prevCart, { id, name, price, img, count: 1 }];
+                    return [...prevCart, { id, name, price, img, stock: 1 }];
                 }
             }
             return prevCart;
@@ -49,9 +49,9 @@ const CartProvider = ({ children }) => {
         setCart((prevCart) =>
             prevCart
                 .map((producto) =>
-                    producto.id === id ? { ...producto, count: producto.count - 1 } : producto
+                    producto.id === id ? { ...producto, stock: producto.stock - 1 } : producto
                 )
-                .filter((producto) => producto.count > 0)
+                .filter((producto) => producto.stock > 0)
         );
     };
 
@@ -62,15 +62,6 @@ const CartProvider = ({ children }) => {
             {children}
         </CartContext.Provider>
     );
-};
-
-// Hook personalizado para usar el contexto del carrito
-export const useCart = () => {
-    const context = useContext(CartContext);
-    if (!context) {
-        throw new Error('useCart debe ser usado dentro de un CartProvider');
-    }
-    return context;
 };
 
 export default CartProvider;

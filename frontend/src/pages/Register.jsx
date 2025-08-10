@@ -5,6 +5,7 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import usuarios from '../data/usuarios';
 
 const Register = ({ onRegisterSuccess }) => {
   const [username, setUsername] = useState('');
@@ -36,6 +37,13 @@ const Register = ({ onRegisterSuccess }) => {
 
     setError(false);
     setMensaje('Registro Exitoso');
+
+    usuarios.push({
+      id: usuarios.length + 1,
+      email: username,
+      password: password,
+      rol: 'user'
+    });
 
     setTimeout(() => {
       onRegisterSuccess();
@@ -91,9 +99,11 @@ const Register = ({ onRegisterSuccess }) => {
           </div>
 
           {/* Boton de registro */}
-          <button type="submit" className="register-btn">
-            Registrarse
-          </button>
+          <Boton
+            texto="Registrarse"
+            onClick={handleSubmit}
+            variante="outline-dark text-dark mt-4"
+          />
 
           {/* Mensajes de error y exito */}
           {error && <div className="alert alert-danger">{mensaje}</div>}

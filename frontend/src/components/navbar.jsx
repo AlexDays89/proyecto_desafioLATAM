@@ -9,9 +9,8 @@ import { SplitButton } from 'primereact/splitbutton';
 import categorias from '../data/categorias';
 import { useNavigate } from 'react-router-dom';
 
-
 const Navbar = () => {
-const { token, setToken} = useContext(UserContext);
+const { token, setToken, user} = useContext(UserContext);
 const navigate = useNavigate();
 const handleLogout = () => { setToken(false);};
 const { calcularTotal } = useCart();
@@ -69,8 +68,10 @@ return (
           label="Menu"
           onClick={() => navigate('/')}
           model={menuItems}
-          className="p-button-secondary p-button-raised p-button-outlined mx-2"
+          severity="secondary"
+          rounded raised outlined
           appendTo="self"
+          text
         />
         <Navigation to="/contacto">
           <Boton
@@ -86,7 +87,7 @@ return (
             label: cat.nombre,
             command: () => navigate(`/productos?categoria=${encodeURIComponent(cat.nombre)}`)
           }))}
-          className="p-button-secondary p-button-raised p-button-outlined mx-2"
+          rounded raised outlined
           appendTo="self"
         />
 
@@ -103,8 +104,16 @@ return (
             texto={<><FontAwesomeIcon icon={faLockOpen} /> Logout</>}
             onClick={handleLogout}
             />
+            {user?.rol === 'admin' && (
+            <Navigation to="/administracion">
+            <Boton
+                severity="secondary" rounded raised outlined
+                texto={<><FontAwesomeIcon icon={faLockOpen} /> Administracion</>}
+            />
+            </Navigation>
+            )}
             </>
-        ) : (
+          ) : (
             <>
             <Navigation to="/login">
             <Boton
@@ -119,7 +128,7 @@ return (
             />
             </Navigation>
             </>
-        )}
+          )}
     </div>
 
     <Navigation to="/cart">
