@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { useCart } from "../context/CartProvider";
+import { useCart } from "../context/useCart";
 import productos from "../data/productos";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";

@@ -1,0 +1,10 @@
+PROYECTO FINAL DESAFIO LATAM - HITO 2
+<br>
+CLAVE DE USUARIO PARA PRUEBA:
+<br>
+ROL admin: admin@gmail.com
+PASS admin: admin123
+<br>
+ROL user: user@gmail.com
+PASS user: user123
+
