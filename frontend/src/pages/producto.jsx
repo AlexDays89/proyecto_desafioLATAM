@@ -109,10 +109,10 @@ const Producto = () => {
                                                     <div className="mb-3">
                                                         <h5 className="text-muted mb-1">Stock disponible:</h5>
                                                         <h4 className={`fw-bold ${
-                                                            producto.count > 20 ? 'text-success' : 
-                                                            producto.count > 5 ? 'text-warning' : 'text-danger'
+                                                            producto.stock > 20 ? 'text-success' : 
+                                                            producto.stock > 5 ? 'text-warning' : 'text-danger'
                                                         }`}>
-                                                            {producto.count} unidades
+                                                            {producto.stock} unidades
                                                         </h4>
                                                     </div>
                                                 </Col>
@@ -125,13 +125,13 @@ const Producto = () => {
                                                 className="btn-lg rounded-pill"
                                                 severity="success"
                                                 texto={producto.price === 0 ? "Solicitar cotización" : "Agregar al carrito"}
-                                                onClick={() => handleAdd(producto.id)}
-                                                disabled={producto.count === 0}
+                                                onClick={() => handleAdd(producto.stock)}
+                                                disabled={producto.stock === 0}
                                                 raised
                                             />
                                         </div>
                                         
-                                        {producto.count === 0 && (
+                                        {producto.stock === 0 && (
                                             <div className="alert alert-warning mt-3" role="alert">
                                                 <i className="fas fa-exclamation-triangle me-2"></i>
                                                 Este servicio no está disponible en este momento.

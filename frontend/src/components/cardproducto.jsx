@@ -4,7 +4,7 @@ import Boton from "./boton";
 import PropTypes from "prop-types";
 
 
-const CardProducto = ({ id, img, name, price, count, onAdd }) => {
+const CardProducto = ({ id, img, name, price, stock, onAdd }) => {
     const navigate = useNavigate();
     
     // Funcion para navegar a la vista detallada del producto
@@ -20,7 +20,7 @@ const CardProducto = ({ id, img, name, price, count, onAdd }) => {
             <Card.Body className="text-center bodyCard">
                 <Card.Title>{name}</Card.Title>
                 <Card.Text>Precio: ${price}</Card.Text>
-                <Card.Text>Stock: {count}</Card.Text>
+                <Card.Text>Stock: {stock}</Card.Text>
                 
                 {/* Contenedor para los botones */}
                 <div className="d-flex flex-column gap-2">
