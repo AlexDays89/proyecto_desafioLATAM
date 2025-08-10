@@ -253,7 +253,7 @@ body {
     font-size: 2em;
     color: #fff;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin: 1.5rem;
 }
 
 .input-box {
@@ -265,8 +265,9 @@ body {
 
 .input-box label {
     position: absolute;
-    top: 50%;
-    left: 5px;
+    top: 15%;
+    left: 15px;
+    bottom: 10px;
     transform: translateY(-50%);
     font-size: 1em;
     color: #fff;
@@ -296,6 +297,7 @@ body {
     color: #fff;
     font-size: 1.2em;
     line-height: 57px;
+    color: #000
 }
 
 .remember-forget {

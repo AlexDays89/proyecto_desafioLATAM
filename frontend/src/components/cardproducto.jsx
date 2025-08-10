@@ -48,7 +48,7 @@ CardProducto.propTypes = {
     img: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    count: PropTypes.number.isRequired,
+    stock: PropTypes.number.isRequired,
     onAdd: PropTypes.func.isRequired
 };
 
