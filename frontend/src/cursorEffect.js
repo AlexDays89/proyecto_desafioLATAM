@@ -1,7 +1,6 @@
 // Efecto de cursor personalizado con particulas doradas
 // Variables globales para el cursor principal y las particulas
 let mainCursor = null;
-let trails = [];
 let mouseX = 0;
 let mouseY = 0;
 

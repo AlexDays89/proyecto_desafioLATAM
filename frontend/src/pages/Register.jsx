@@ -5,7 +5,7 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import { UserContext } from '../context/UserContext';
+import usuarios from '../data/usuarios';
 
 const Register = ({ onRegisterSuccess }) => {
   const [username, setUsername] = useState('');
@@ -36,9 +36,12 @@ const Register = ({ onRegisterSuccess }) => {
       return;
     }
 
-    const userData = {
-      username: username,
-      mail: username, // el mail será igual al username
+    setError(false);
+    setMensaje('Registro Exitoso');
+
+    usuarios.push({
+      id: usuarios.length + 1,
+      email: username,
       password: password,
       rol: 'user'
     };
@@ -127,7 +130,7 @@ const Register = ({ onRegisterSuccess }) => {
           {/* Boton de registro */}
           <Boton
             texto="Registrarse"
-            type="submit"
+            onClick={handleSubmit}
             variante="outline-dark text-dark mt-4"
           />
 

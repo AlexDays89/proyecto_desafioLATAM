@@ -10,9 +10,9 @@ const Carrusel = () => {
     };
 
     return (
-
-        <div className="container my-5">
-                <h2 className="text-center mb-4 fw-bold" style={{ color: '#764ba2' }}>Nuestros Servicios</h2>
+        <div className="carrusel-servicios-section">
+            <div className="container my-5">
+                <h2 className="text-center mb-4 fw-bold">Nuestros Servicios</h2>
                 <Carousel 
                     indicators={true} 
                     controls={true} 
@@ -54,6 +54,7 @@ const Carrusel = () => {
                     ))}
                 </Carousel>
             </div>
-        )
-    }
+        </div>
+    );
+};
 export default Carrusel;

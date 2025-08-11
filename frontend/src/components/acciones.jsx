@@ -5,7 +5,7 @@ const Acciones = () => {
         <>
         <div className="container my-5">
             <div className="row justify-content-center">
-                <div className="col-md-8 text-center acciones">
+                <div className="col-md-8 text-center">
                     <h3 className="fw-bold mb-3">¿Listo para descubrir tu destino?</h3>
                     <p className="lead mb-4">Explora nuestros servicios y encuentra las respuestas que buscas</p>
                     <div className="d-flex justify-content-center gap-3 flex-wrap">

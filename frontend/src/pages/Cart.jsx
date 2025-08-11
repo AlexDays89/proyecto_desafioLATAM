@@ -20,7 +20,7 @@ const Cart = () => {
         <p>{name}</p>
       </div>
       <div className="text-center">
-        <p>${price.toLocaleString()}</p>
+        <p className="precio">${price.toLocaleString()}</p>
       </div>
       <div className="cantidad">
         <Boton severity="secondary" rounded raised outlined texto="-" onClick={() => handleRemove(id)} />
@@ -31,7 +31,7 @@ const Cart = () => {
   );
 
   return (
-    <div className="contenedor-home">
+    <div className="contenedor-home carrito-section">
       <Navbar />
     <div className="carrito">
       <h1>Detalles del pedido</h1>
@@ -39,7 +39,7 @@ const Cart = () => {
         {cart.length > 0 ? cart.map(renderCartItem) : <li>El carrito está vacío.</li>}
       </ul>
       <div>
-        <h3>Total: ${total.toLocaleString()}</h3>
+        <h3 className="total">Total: ${total.toLocaleString()}</h3>
         <div className="botondepago">
           <Boton
             severity="secondary" rounded raised outlined

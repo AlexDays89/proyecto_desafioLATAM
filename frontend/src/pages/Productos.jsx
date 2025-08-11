@@ -4,7 +4,7 @@ import Footer from '../components/footer'
 
 function Productos() {
     return (
-        <div className="contenedor-home">
+        <div className="contenedor-home tienda-section">
             <Navbar />
             <VistaProductos/>
             <Footer />

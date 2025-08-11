@@ -8,7 +8,7 @@ function Principal() {
     return (
         <div className="principal">
             {/* Sección Hero - Título principal y descripción de servicios */}
-            <div className="container-fluid mb-4 contenedor-hero">
+            <div className="container-fluid contenedor-hero">
                 <div className="container text-center text-white">
                     <h1 className="display-4 fw-bold mb-3">Bienvenido a Nuestro Mundo Místico</h1>
                     <p className="lead mb-4">Descubre los secretos del universo a través de nuestras lecturas de tarot y servicios energéticos especializados</p>
@@ -27,7 +27,8 @@ function Principal() {
             <Carrusel />
 
             {/* Sección Acerca de */}
-            <div className="container my-5" id="acerca-de">
+            <div className="acerca-de-section" id="acerca-de">
+                <div className="container my-5">
                 <h2 className="text-center fw-bold mb-5" style={{ color: '#764ba2' }}>Acerca de:</h2>
                 <div className="row align-items-center">
                     <div className="col-md-6">
@@ -45,12 +46,15 @@ function Principal() {
                         </p>
                     </div>
                 </div>
+                </div>
             </div>
             {/* Sección Tipos de Tarot */}
-            <TiposTarot />
+            <div className="tipos-tarot-section">
+                <TiposTarot />
+            </div>
 
             {/* Sección Tipos de Lectura */}
-            <div className="container-fluid py-5" id="tipos-de-lectura" style={{ backgroundColor: '#f8f9fa' }}>
+            <div className="tipos-consulta-section" id="tipos-de-lectura">
                 <div className="container">
                     <h2 className="text-center mb-5 fw-bold" style={{ color: '#764ba2' }}>Tipos de Consulta</h2>
                     <div className="row g-4">
@@ -103,7 +107,9 @@ function Principal() {
             </div>
 
             {/* Sección Call to Action */}
-            <Acciones />
+            <div className="call-to-action-section">
+                <Acciones />
+            </div>
         </div>
     )
 }

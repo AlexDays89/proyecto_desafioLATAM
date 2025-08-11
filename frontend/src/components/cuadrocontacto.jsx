@@ -5,7 +5,7 @@ function CuadroContacto() {
         <Container className="my-5">
             <Row className="justify-content-center">
                 <Col lg={8} md={10}>
-                    <Card className="shadow-lg border-0">
+                    <Card className="shadow-lg border-0 contacto-card-glass">
                         <Card.Body className="p-5">
                             {/* Titulo principal */}
                             <div className="text-center mb-5">

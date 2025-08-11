@@ -34,8 +34,9 @@ const VistaProductos = () => {
 
   return (
     <Container className="my-4">
+      {/* Titulo de la tienda con estilo protegido */}
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 className="mb-0">{categoria}</h2>
+        <h2 className="mb-0 tienda-titulo">{categoria}</h2>
         <div className="d-flex gap-2">
           <Button variant="outline-primary" onClick={() => {setCategoria("Todos"); precioInicial()}}>Borrar Filtros</Button>
           <DropdownButton
@@ -51,7 +52,8 @@ const VistaProductos = () => {
           </DropdownButton>
         </div>
       </div>
-      <Form className="mb-4 d-flex gap-3 align-items-center">
+      {/* Seccion de filtros con estilo protegido */}
+      <Form className="mb-4 d-flex gap-3 align-items-center tienda-filtros">
         <Form.Label className="mb-0">Precio entre:</Form.Label>
         <Form.Control
           type="range"

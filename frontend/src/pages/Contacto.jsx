@@ -4,10 +4,12 @@ import Footer from '../components/footer'
 
 function Contacto() {
     return (
-        <div className="contenedor-home">
-            <Navbar />
-            <CuadroContacto />
-            <Footer />
+        <div className="contacto-section">
+            <div className="w-100">
+                <Navbar />
+                <CuadroContacto />
+                <Footer />
+            </div>
         </div>
     )
 }

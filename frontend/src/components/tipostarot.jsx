@@ -3,7 +3,7 @@ import barajas from '../data/tiposbarajas';
 const TiposTarot = () => {
     return (
         <div className="container my-5 tipos-de-tarot">
-            <h2 className="text-center mb-5 fw-bold" style={{ color: '#764ba2' }}>Nuestros Tipos de Tarot</h2>
+            <h2 className="text-center mb-5 fw-bold">Nuestros Tipos de Tarot</h2>
             <div className="row g-4">
                 {barajas.map(baraja => (
                     <div className="col-md-4" key={baraja.id}>

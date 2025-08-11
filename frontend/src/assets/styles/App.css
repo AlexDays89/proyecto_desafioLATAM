@@ -180,6 +180,8 @@ body {
     /* Reducir espacio vertical del navbar */
     padding: 0.5rem 0;
     min-height: auto;
+    /* Linea divisoria inferior amarilla igual que el footer */
+    border-bottom: 3px solid #D4A574;
 }
 
 /* Overlay semitransparente para mejorar legibilidad del texto en el navbar */
@@ -929,4 +931,377 @@ body {
     justify-Content: center;
     position: relative;
     background-image: url('/img/herobg.jpg');
+    /* Linea divisoria inferior amarilla igual que el navbar */
+    border-bottom: 3px solid #D4A574;
+}
+
+/* Estilos para la seccion tienda con animacion de fondo */
+.tienda-section {
+  background-image: url('/img/bg3.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: animateBg 5s infinite;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Overlay semitransparente para mejorar legibilidad en la seccion tienda */
+.tienda-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+/* Contenido de la seccion tienda por encima del overlay */
+.tienda-section > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Estilos especificos para el titulo de la tienda */
+.tienda-titulo {
+  color: white !important;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 10;
+  position: relative;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Estilos especificos para la seccion de filtros de la tienda */
+.tienda-filtros {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 10;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* Estilos para los elementos dentro de los filtros */
+.tienda-filtros .form-label,
+.tienda-filtros span {
+  color: white !important;
+  font-weight: 500;
+}
+
+/* Estilos para los botones dentro de los filtros */
+.tienda-filtros .btn {
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Estilos para el dropdown dentro de los filtros */
+.tienda-filtros .dropdown-toggle {
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Estilos para la seccion de contacto con fondo estatico */
+.contacto-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-image: url('/img/bg1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+}
+
+/* Efecto vidrio para la card de contacto */
+.contacto-card-glass {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    border-radius: 20px !important;
+}
+
+/* Overlay semitransparente para mejorar legibilidad en contacto */
+.contacto-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+/* Asegurar que el contenido este por encima del overlay */
+.contacto-section > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Estilos para las secciones del inicio con fondo compartido navbar.jpeg */
+/* Seccion Acerca de con fondo navbar.jpeg */
+.acerca-de-section {
+    background-image: url('/img/navbar.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 60px 0;
+}
+
+/* Overlay semitransparente para mejorar legibilidad en seccion acerca de */
+.acerca-de-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Contenido de la seccion acerca de por encima del overlay */
+.acerca-de-section > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Seccion Tipos de Tarot con fondo navbar.jpeg */
+.tipos-tarot-section {
+    background-image: url('/img/navbar.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 60px 0;
+}
+
+/* Overlay semitransparente para mejorar legibilidad en tipos de tarot */
+.tipos-tarot-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Contenido de la seccion tipos de tarot por encima del overlay */
+.tipos-tarot-section > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Seccion Tipos de Consulta con fondo navbar.jpeg */
+.tipos-consulta-section {
+    background-image: url('/img/navbar.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 60px 0;
+}
+
+/* Overlay semitransparente para mejorar legibilidad en tipos de consulta */
+.tipos-consulta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Contenido de la seccion tipos de consulta por encima del overlay */
+.tipos-consulta-section > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Seccion Call to Action (Listo para descubrir tu destino) con fondo navbar.jpeg */
+.call-to-action-section {
+    background-image: url('/img/navbar.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 60px 0;
+}
+
+/* Overlay semitransparente para mejorar legibilidad en call to action */
+.call-to-action-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Contenido de la seccion call to action por encima del overlay */
+.call-to-action-section > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Estilos especificos para texto en secciones con fondo navbar.jpeg */
+.acerca-de-section h2,
+.tipos-tarot-section h2,
+.tipos-consulta-section h2,
+.call-to-action-section h3 {
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Estilos para el texto descriptivo en estas secciones */
+.acerca-de-section p,
+.tipos-consulta-section p,
+.call-to-action-section p {
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Seccion del carrusel Nuestros Servicios con fondo bg3.jpg */
+.carrusel-servicios-section {
+    background-image: url('/img/bg3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 60px 0;
+    /* Linea divisoria inferior amarilla igual que el navbar */
+    border-bottom: 3px solid #D4A574;
+}
+
+/* Overlay semitransparente para mejorar legibilidad en carrusel servicios */
+.carrusel-servicios-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+/* Contenido del carrusel por encima del overlay */
+.carrusel-servicios-section > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Estilos especificos para el titulo del carrusel */
+.carrusel-servicios-section h2 {
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Seccion de la pagina carrito con fondo carrito.jpg */
+.carrito-section {
+    background-image: url('/img/carrito.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Overlay semitransparente para mejorar legibilidad en la pagina carrito */
+.carrito-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+/* Asegurar que el contenido del carrito este por encima del overlay */
+.carrito-section > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Estilos para mejorar contraste en la pagina del carrito */
+/* Todos los textos en blanco con sombra para contraste */
+.carrito-section h1,
+.carrito-section h2,
+.carrito-section h3,
+.carrito-section h4,
+.carrito-section h5,
+.carrito-section h6,
+.carrito-section p,
+.carrito-section span,
+.carrito-section div,
+.carrito-section li {
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Estilos especificos para elementos del carrito */
+.carrito-section .cart-item {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Botones en la pagina del carrito */
+.carrito-section button,
+.carrito-section .btn {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    border: 2px solid white !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.carrito-section button:hover,
+.carrito-section .btn:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Precios y totales destacados */
+.carrito-section .precio,
+.carrito-section .total {
+    color: #D4A574 !important;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-size: 1.2rem;
+}
+
+/* Imagen de productos en el carrito */
+.carrito-section .imagenProducto {
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
