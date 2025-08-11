@@ -125,7 +125,7 @@ const Producto = () => {
                                                 className="btn-lg rounded-pill"
                                                 severity="success"
                                                 texto={producto.price === 0 ? "Solicitar cotización" : "Agregar al carrito"}
-                                                onClick={() => handleAdd(producto.stock)}
+                                                onClick={() => handleAdd(producto.id)}
                                                 disabled={producto.stock === 0}
                                                 raised
                                             />

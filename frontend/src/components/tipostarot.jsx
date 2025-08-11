@@ -1,6 +1,4 @@
 import barajas from '../data/tiposbarajas';
-import PropTypes from 'prop-types';
-
 
 const TiposTarot = () => {
     return (
@@ -31,11 +29,4 @@ const TiposTarot = () => {
     );
 };
 
-TiposTarot.propTypes = {
-    id: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    descripcion: PropTypes.string.isRequired
-};
-        
 export default TiposTarot;

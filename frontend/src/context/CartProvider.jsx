@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { CartContext } from "./CartContext";
 import productosMock from "../data/productos";
 
 const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
-    const calcularTotal = () => {
-        return cart.reduce((total, { price, stock }) => total + price * stock, 0);
-    };
+    const total = useMemo(() => {
+        return cart.reduce((total, { price, count }) => total + price * count, 0);
+    }, [cart]);
 
     const [productos, setProductos] = useState([]);
 
@@ -32,13 +32,13 @@ const CartProvider = ({ children }) => {
             const productoInCart = prevCart.find((p) => p.id === id);
             if (productoInCart) {
                 return prevCart.map((p) =>
-                    p.id === id ? { ...p, stock: p.stock + 1 } : p
+                    p.id === id ? { ...p, count: p.count + 1 } : p
                 );
             } else {
                 const newProducto = productos.find((p) => p.id === id);
                 if (newProducto) {
                     const { id, name, price, img } = newProducto;
-                    return [...prevCart, { id, name, price, img, stock: 1 }];
+                    return [...prevCart, { id, name, price, img, count: 1 }];
                 }
             }
             return prevCart;
@@ -49,15 +49,15 @@ const CartProvider = ({ children }) => {
         setCart((prevCart) =>
             prevCart
                 .map((producto) =>
-                    producto.id === id ? { ...producto, stock: producto.stock - 1 } : producto
+                    producto.id === id ? { ...producto, count: producto.count - 1 } : producto
                 )
-                .filter((producto) => producto.stock > 0)
+                .filter((producto) => producto.count > 0)
         );
     };
 
     return (
         <CartContext.Provider
-            value={{ cart, productos, consultarApi, handleAdd, handleRemove, calcularTotal }}
+            value={{ cart, productos, consultarApi, handleAdd, handleRemove, total }}
         >
             {children}
         </CartContext.Provider>

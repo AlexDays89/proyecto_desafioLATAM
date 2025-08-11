@@ -8,8 +8,7 @@ import Footer from '../components/footer';
 
 const Cart = () => {
   const { token } = useContext(UserContext);
-  const { calcularTotal, handleAdd, handleRemove, cart } = useCart();
-  const total = calcularTotal();
+  const { total, handleAdd, handleRemove, cart } = useCart();
 
 
   const renderCartItem = ({ id, name, price, count, img }) => (

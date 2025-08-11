@@ -1,11 +1,11 @@
 import { InputText } from 'primereact/inputtext';
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Boton from '../components/boton';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import usuarios from '../data/usuarios';
+import { UserContext } from '../context/UserContext';
 
 const Register = ({ onRegisterSuccess }) => {
   const [username, setUsername] = useState('');
@@ -13,6 +13,7 @@ const Register = ({ onRegisterSuccess }) => {
   const [confirmarpassword, setConfirmarpassword] = useState('');
   const [error, setError] = useState(false);
   const [mensaje, setMensaje] = useState('');
+  const { setUser } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,10 +38,8 @@ const Register = ({ onRegisterSuccess }) => {
 
     setError(false);
     setMensaje('Registro Exitoso');
-
-    usuarios.push({
-      id: usuarios.length + 1,
-      email: username,
+    setUser({
+      username: username,
       password: password,
       rol: 'user'
     });
@@ -101,7 +100,7 @@ const Register = ({ onRegisterSuccess }) => {
           {/* Boton de registro */}
           <Boton
             texto="Registrarse"
-            onClick={handleSubmit}
+            type="submit"
             variante="outline-dark text-dark mt-4"
           />
 

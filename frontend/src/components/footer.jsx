@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTiktok } from '@fortawesome/free-brands-svg-icons';
 import { faPhone, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import Navigation from './navigation';
 
 function Footer() {
     return (
@@ -14,10 +15,10 @@ function Footer() {
                 <div className="footer-section">
                     <h4>Enlaces Útiles</h4>
                     <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/productos">Productos</a></li>
-                        <li><a href="/contacto">Contacto</a></li>
-                        <li><a href="/profile">Mi Perfil</a></li>
+                        <li><Navigation to="/">Home</Navigation></li>
+                        <li><Navigation to="/productos">Productos</Navigation></li>
+                        <li><Navigation to="/contacto">Contacto</Navigation></li>
+                        <li><Navigation to="/profile">Mi Perfil</Navigation></li>
                     </ul>
                 </div>
                 
@@ -27,14 +28,14 @@ function Footer() {
                         <p><FontAwesomeIcon icon={faPhone} /> +56 9 5406 3557</p>
                         <p><FontAwesomeIcon icon={faEnvelope} /> contacto@aritarot.cl</p>
                         <p><FontAwesomeIcon icon={faMapMarkerAlt} /> Santiago, Chile</p>
-                        <p><a href="https://wa.me/56954063557" target="_blank" rel="noopener noreferrer">WhatsApp: +56 9 5406 3557</a></p>
+                        <p><Navigation to="https://wa.me/56954063557" target="_blank" rel="noopener noreferrer">WhatsApp: +56 9 5406 3557</Navigation></p>
                     </div>
                 </div>
                 
                 <div className="footer-section">
                     <h4>Síguenos</h4>
                     <div className="social-links">
-                        <a href="https://www.tiktok.com/@caroline_777ari?_t=ZM-8yjt2gNaeQ9&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok @caroline_777ari"><FontAwesomeIcon icon={faTiktok} /></a>
+                        <Navigation to="https://www.tiktok.com/@caroline_777ari?_t=ZM-8yjt2gNaeQ9&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok @caroline_777ari"><FontAwesomeIcon icon={faTiktok} /></Navigation>
                     </div>
                 </div>
             </div>

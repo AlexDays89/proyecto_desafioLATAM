@@ -10,11 +10,12 @@ import categorias from '../data/categorias';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-const { token, setToken, user} = useContext(UserContext);
+const { token, setToken, user, setUser} = useContext(UserContext);
 const navigate = useNavigate();
-const handleLogout = () => { setToken(false);};
-const { calcularTotal } = useCart();
-const total = calcularTotal();
+const handleLogout = () => { 
+  setToken(false);
+  setUser(null);};
+const { total } = useCart();
 
 // Función para hacer scroll suave a las secciones
 const scrollToSection = (sectionId) => {
