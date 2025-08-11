@@ -12,7 +12,7 @@ const CartProvider = ({ children }) => {
 
     const consultarApi = async () => {
         try {
-            const url = "http://localhost:3000/api/productos";
+            const url = "http://localhost:3000/productos";
             const res = await fetch(url);
             if (!res.ok) throw new Error('API error');
             const data = await res.json();

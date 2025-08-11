@@ -1,5 +1,5 @@
 // Array de servicios de tarot disponibles en la tienda
-// Cada servicio mantiene la estructura: id, name, price, count, category, img
+// Cada servicio mantiene la estructura: id, name, price, stock, category, img
 const productos = [
   {
     id: 1,

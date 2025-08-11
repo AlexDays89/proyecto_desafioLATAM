@@ -15,7 +15,7 @@ const Register = ({ onRegisterSuccess }) => {
   const [mensaje, setMensaje] = useState('');
   const { setUser } = useContext(UserContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!username.trim() || !password.trim() || !confirmarpassword.trim()) {
@@ -36,17 +36,44 @@ const Register = ({ onRegisterSuccess }) => {
       return;
     }
 
-    setError(false);
-    setMensaje('Registro Exitoso');
-    setUser({
+    const userData = {
       username: username,
+      mail: username, // el mail será igual al username
       password: password,
       rol: 'user'
-    });
-
-    setTimeout(() => {
-      onRegisterSuccess();
-    }, 2000);
+    };
+  
+    try {
+      const response = await fetch('http://localhost:3000/usuarios/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      });
+  
+      if (!response.ok) {
+        const data = await response.json();
+        setError(true);
+        setMensaje(data.error || 'Error en el registro');
+        return;
+      }
+  
+      const data = await response.json();
+      setUser({
+        username: data.username,
+        mail: data.mail,
+        rol: data.rol,
+      });
+      setError(false);
+      setMensaje('Registro Exitoso');
+      setTimeout(() => {
+        onRegisterSuccess();
+      }, 2000);
+      // Redirigir o limpiar formulario si quieres
+    } catch (error) {
+      console.error(error);
+      setError(true);
+      setMensaje('Error de conexión con el servidor');
+    }
   };
 
   return (

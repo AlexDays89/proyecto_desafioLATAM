@@ -7,4 +7,5 @@ PASS admin: admin123
 <br>
 ROL user: user@gmail.com
 PASS user: user123
-
+<br>
+BACKEND EN CONSTRUCCION. FALTA RENOMBRAR ALGUNAS COSAS
