@@ -38,9 +38,12 @@ const Register = ({ onRegisterSuccess }) => {
 
     const userData = {
       username: username,
-      mail: username, // el mail será igual al username
+      mail: username,
       password: password,
-      rol: 'user'
+      rol: 'user',
+      nombre: null,
+      apellido: null,
+      direccion: null
     };
   
     try {
@@ -89,7 +92,7 @@ const Register = ({ onRegisterSuccess }) => {
           <div className="input-box">
             <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
             <InputText
-              type="email"
+              type="text"
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}

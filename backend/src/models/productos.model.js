@@ -27,6 +27,6 @@ export const updateProduct = async (id, product) => {
 };
 
 export const deleteProduct = async (id) => {
-    const result = await pool.query("DELETE FROM products WHERE id = $1 RETURNING *", [id]);
-    return result.rows[0] ? { id: result.rows[0].id, name: result.rows[0].name, price: result.rows[0].price, stock: result.rows[0].stock, category: result.rows[0].category, img: result.rows[0].img } : null;
+    const result = await pool.query("DELETE FROM productos WHERE id_producto = $1 RETURNING *", [id]);
+    return result.rows[0];
 };

@@ -45,7 +45,6 @@ export const createProduct = async (req, res) => {
     try {
         const { name, price, stock, category, img, description } = req.body;
         const newProduct = await productosModel.createProduct({ name, price, stock, category, img, description });
-        // Mapear campos para el frontend
         const productFront = {
             id: newProduct.id_producto,
             name: newProduct.nombre,
@@ -57,7 +56,6 @@ export const createProduct = async (req, res) => {
         };
         res.status(201).json(productFront);
     } catch (error) {
-        console.error(error);
         res.status(500).json({ error: "Error al crear el producto" });
     }
 };
@@ -70,7 +68,6 @@ export const updateProduct = async (req, res) => {
         if (!updatedProduct) {
             return res.status(404).json({ error: "Producto no encontrado" });
         }
-        // Mapear campos para el frontend
         const productFront = {
             id: updatedProduct.id_producto,
             name: updatedProduct.nombre,
@@ -82,7 +79,6 @@ export const updateProduct = async (req, res) => {
         };
         res.json(productFront);
     } catch (error) {
-        console.error(error);
         res.status(500).json({ error: "Error al actualizar el producto" });
     }
 };
@@ -94,7 +90,6 @@ export const deleteProduct = async (req, res) => {
         if (!deletedProduct) {
             return res.status(404).json({ error: "Producto no encontrado" });
         }
-        // Mapear campos para el frontend
         const productFront = {
             id: deletedProduct.id_producto,
             name: deletedProduct.nombre,
@@ -106,7 +101,6 @@ export const deleteProduct = async (req, res) => {
         };
         res.json({ message: "Producto eliminado exitosamente", deletedProduct: productFront });
     } catch (error) {
-        console.error(error);
         res.status(500).json({ error: "Error al eliminar el producto" });
     }
 };
