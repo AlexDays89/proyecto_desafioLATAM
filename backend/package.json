@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "dev": "nodemon index.js"
   },
   "keywords": [],
@@ -18,9 +18,13 @@
     "jest": "^30.0.5",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.16.3",
-    "swagger": "^0.7.5"
+    "swagger": "^0.7.5",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "mocha": "^11.7.1",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4"
   }
 }
