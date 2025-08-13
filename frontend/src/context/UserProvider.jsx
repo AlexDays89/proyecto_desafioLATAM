@@ -2,7 +2,7 @@ import { useState } from "react";
 import { UserContext } from "./UserContext";
 
 const UserProvider = ({ children }) => {
-    const [tokenState, setTokenState] = useState(() => localStorage.getItem("token") || false);
+    const [tokenState, setTokenState] = useState(() => localStorage.getItem("token") || null);
     const [userState, setUserState] = useState(() => {
         const stored = localStorage.getItem("user");
         return stored ? JSON.parse(stored) : null;
@@ -10,7 +10,7 @@ const UserProvider = ({ children }) => {
 
     const setToken = (value) => {
         setTokenState(value);
-        if (value) {
+        if (value !== null) {
             localStorage.setItem("token", value);
         } else {
             localStorage.removeItem("token");
@@ -19,7 +19,7 @@ const UserProvider = ({ children }) => {
 
     const setUser = (value) => {
         setUserState(value);
-        if (value) {
+        if (value !== null) {
             localStorage.setItem("user", JSON.stringify(value));
         } else {
             localStorage.removeItem("user");

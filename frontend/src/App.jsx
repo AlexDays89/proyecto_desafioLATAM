@@ -26,9 +26,17 @@ function App() {
 }
 
 function AppComponent() {
-  const {token, setToken} = useContext(UserContext);
-  const handleLogin = () => setToken(true);
-  const handleLogout = () => setToken(false);
+  const { token, setToken, setUser } = useContext(UserContext);
+  // Handler para login exitoso: setea token y usuario
+  const handleLogin = (token, user) => {
+    setToken(token);
+    setUser(user);
+  };
+  // Handler para logout: limpia token y usuario
+  const handleLogout = () => {
+    setToken(null);
+    setUser(null);
+  };
 
     return (
         <div>
