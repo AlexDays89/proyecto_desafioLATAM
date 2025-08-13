@@ -681,7 +681,7 @@ body {
 }
 
 /* Contenedor principal del formulario de registro con efectos de cristal */
-.register-box {
+.register-box, .login-box {
     width: 420px;
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -689,36 +689,43 @@ body {
     border-radius: 10px;
     color: #fff;
     padding: 30px 40px;
+    box-sizing: border-box;
+    margin: 0 auto;
 }
 
 /* Titulo del formulario de registro */
-.register-box h2 {
+.register-box h2, .login-box h2 {
     font-size: 2em;
+    color: #fff;
     text-align: center;
     margin-bottom: 30px;
-}
+    margin-top: 1.5rem;
+} 
 
 /* Contenedor de cada campo de entrada en el registro */
-.register-box .input-box {
+.register-box .input-box, .login-box .input-box {
     position: relative;
     width: 100%;
     height: 50px;
     margin: 30px 0;
+    border-bottom: 2px solid #fff;
 }
 
 /* Estilos para los campos de entrada del registro */
-.register-box .input-box input {
+.register-box .input-box input,
+.login-box .input-box input {
     width: 100%;
-    height: 100%;
+    height: 50px;
     background: transparent;
     border: none;
     outline: none;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 40px;
-    font-size: 16px;
+    font-size: 1em;
     color: #fff;
-    padding: 20px 45px 20px 20px;
-}
+    padding: 0 35px 0 5px;
+    border-radius: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
+} 
 
 /* Placeholder transparente para los campos del registro */
 .register-box .input-box input::placeholder {
@@ -726,37 +733,42 @@ body {
 }
 
 /* Iconos dentro de los campos del registro */
-.register-box .input-box .input-icon {
+.register-box .input-box .icon, .login-box .input-box .icon {
     position: absolute;
-    right: 20px;
+    right: 8px;
+    color: #fff;
+    font-size: 1.2em;
+    line-height: 57px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 16px;
-    color: #fff;
-}
+    z-index: 2;
+} 
 
 /* Labels flotantes para los campos del registro */
-.register-box .input-box label {
+.register-box .input-box label,
+.login-box .input-box label {
     position: absolute;
-    top: 50%;
-    left: 20px;
+    top: 15%;
+    left: 15px;
+    bottom: 10px;
     transform: translateY(-50%);
-    font-size: 16px;
+    font-size: 1em;
     color: #fff;
-    font-weight: 500;
     pointer-events: none;
-    transition: 0.3s;
-}
+    transition: 0.5s;
+} 
 
 /* Animacion de labels cuando el campo esta enfocado o tiene contenido */
 .register-box .input-box input:focus ~ label,
-.register-box .input-box input:valid ~ label {
+.register-box .input-box input:valid ~ label,
+.login-box .input-box input:focus ~ label,
+.login-box .input-box input:valid ~ label {
     top: -5px;
     font-size: 12px;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0,0,0,0.5);
     padding: 2px 8px;
     border-radius: 4px;
-}
+} 
 
 /* Boton de registro con estilo moderno */
 .register-box .register-btn {
@@ -782,39 +794,37 @@ body {
 }
 
 /* Estilos para mensajes de alerta en el registro */
-.register-box .alert {
-    margin-top: 20px;
-    padding: 10px;
+.register-box .alert, .login-box .alert {
+    margin-top: 1rem;
+    font-weight: bold;
+    padding: 0.5rem;
     border-radius: 5px;
     text-align: center;
-    font-weight: 500;
-}
+} 
 
-.register-box .alert-danger {
+.register-box .alert-danger, .login-box .alert-danger {
     background: rgba(220, 53, 69, 0.8);
+    color: #fff;
     border: 1px solid rgba(220, 53, 69, 0.5);
-    color: #fff;
-}
+} 
 
-.register-box .alert-success {
+.register-box .alert-success, .login-box .alert-success {
     background: rgba(40, 167, 69, 0.8);
-    border: 1px solid rgba(40, 167, 69, 0.5);
     color: #fff;
-}
+    border: 1px solid rgba(40, 167, 69, 0.5);
+} 
 
 /* Media queries para responsive del registro */
 @media (max-width: 768px) {
-    .register-box {
+    .register-box, .login-box {
         width: 90%;
         padding: 20px 30px;
     }
-    
-    .register-box h2 {
+    .register-box h2, .login-box h2 {
         font-size: 1.5em;
         margin-bottom: 20px;
     }
-    
-    .register-box .input-box {
+    .register-box .input-box, .login-box .input-box {
         margin: 20px 0;
     }
 }

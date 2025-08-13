@@ -1,4 +1,3 @@
-import { InputText } from 'primereact/inputtext';
 import React, { useState, useContext } from "react";
 import Boton from '../components/boton';
 import Navbar from '../components/navbar';
@@ -13,7 +12,7 @@ const Register = ({ onRegisterSuccess }) => {
   const [confirmarpassword, setConfirmarpassword] = useState('');
   const [error, setError] = useState(false);
   const [mensaje, setMensaje] = useState('');
-  const { setUser } = useContext(UserContext);
+  const { setUser, setToken } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,11 +60,10 @@ const Register = ({ onRegisterSuccess }) => {
       }
   
       const data = await response.json();
-      setUser({
-        username: data.username,
-        mail: data.mail,
-        rol: data.rol,
-      });
+      setUser(data.usuario);
+      if (typeof setToken === 'function' && data.token) {
+        setToken(data.token);
+      }
       setError(false);
       setMensaje('Registro Exitoso');
       setTimeout(() => {
@@ -90,48 +88,54 @@ const Register = ({ onRegisterSuccess }) => {
         <form onSubmit={handleSubmit}>
           {/* Campo de email con icono y label flotante */}
           <div className="input-box">
-            <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
-            <InputText
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            <label htmlFor="username">Email</label>
-          </div>
+  <span className="icon">
+    <FontAwesomeIcon icon={faEnvelope} />
+  </span>
+  <input
+    type="email"
+    id="username"
+    value={username}
+    onChange={(e) => setUsername(e.target.value)}
+    required
+  />
+  <label htmlFor="username">Email</label>
+</div>
 
           {/* Campo de contraseña con icono y label flotante */}
           <div className="input-box">
-            <FontAwesomeIcon icon={faLock} className="input-icon" />
-            <InputText
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <label htmlFor="password">Contraseña</label>
-          </div>
+  <span className="icon">
+    <FontAwesomeIcon icon={faLock} />
+  </span>
+  <input
+    type="password"
+    id="password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    required
+  />
+  <label htmlFor="password">Contraseña</label>
+</div>
 
           {/* Campo de confirmar contraseña con icono y label flotante */}
           <div className="input-box">
-            <FontAwesomeIcon icon={faLock} className="input-icon" />
-            <InputText
-              type="password"
-              id="confirmarpassword"
-              value={confirmarpassword}
-              onChange={(e) => setConfirmarpassword(e.target.value)}
-              required
-            />
-            <label htmlFor="confirmarpassword">Confirmar Contraseña</label>
-          </div>
+  <span className="icon">
+    <FontAwesomeIcon icon={faLock} />
+  </span>
+  <input
+    type="password"
+    id="confirmarpassword"
+    value={confirmarpassword}
+    onChange={(e) => setConfirmarpassword(e.target.value)}
+    required
+  />
+  <label htmlFor="confirmarpassword">Confirmar Contraseña</label>
+</div>
 
           {/* Boton de registro */}
           <Boton
             texto="Registrarse"
             type="submit"
-            variante="outline-dark text-dark mt-4"
+            variante="outline-dark text-dark mt-4 auth-btn"
           />
 
           {/* Mensajes de error y exito */}

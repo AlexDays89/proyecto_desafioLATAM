@@ -106,13 +106,27 @@ return (
             onClick={handleLogout}
             />
             {user?.rol === 'admin' && (
-            <Navigation to="/administracion">
-            <Boton
+              <Navigation to="/administracion">
+                <Boton
+                  severity="secondary" rounded raised outlined
+                  texto={<><FontAwesomeIcon icon={faLockOpen} /> Administrador</>}
+                />
+              </Navigation>
+            )}
+            </>
+          ) : token ? (
+            <>
+            <Navigation to="/profile">
+              <Boton
                 severity="secondary" rounded raised outlined
-                texto={<><FontAwesomeIcon icon={faLockOpen} /> Administracion</>}
+                texto={<><FontAwesomeIcon icon={faLockOpen} /> Profile</>}
             />
             </Navigation>
-            )}
+            <Boton
+            severity="secondary" rounded raised outlined
+            texto={<><FontAwesomeIcon icon={faLockOpen} /> Logout</>}
+            onClick={handleLogout}
+            />
             </>
           ) : (
             <>

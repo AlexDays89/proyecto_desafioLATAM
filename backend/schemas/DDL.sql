@@ -1,18 +1,12 @@
 CREATE TABLE usuarios (
     id_username SERIAL PRIMARY KEY,
-    username VARCHAR(20) NOT NULL,
+    username VARCHAR(30) NOT NULL,
     direccion VARCHAR(255),
     mail VARCHAR(30) UNIQUE NOT NULL,
     password VARCHAR(16) NOT NULL,
     rol VARCHAR(20) DEFAULT 'user'
-);
-
-
-CREATE TABLE sessions (
-    id_sesion SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
-    session_token VARCHAR(255) NOT NULL,
-    expires_at TIMESTAMP NOT NULL
+    nombre VARCHAR(100),
+    apellido VARCHAR(100),
 );
 
 CREATE TABLE carritos_activos (

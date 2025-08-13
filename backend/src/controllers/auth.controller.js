@@ -5,10 +5,10 @@ dotenv.config();
 
 export const register = async (req, res) => {
     try {
-        const { mail, password, nombre, apellido, direccion } = req.body;
+        const { username, mail, password, nombre, apellido, direccion } = req.body;
         const rol = req.body.rol || "user";
-        const user = await authModel.register({ mail, password, rol, nombre, apellido, direccion });
-        const token = jwt.sign({ id: user.id_username, rol: user.rol }, process.env.JWT_SECRET, { expiresIn: "7d" });
+        const user = await authModel.register({ username, mail, password, rol, nombre, apellido, direccion });
+        const token = jwt.sign({ id: user.id_username, rol: user.rol }, process.env.JWT_SECRET, { expiresIn: "1d" });
         res.status(201).json({
             usuario: {
                 id: user.id_username,
@@ -33,7 +33,7 @@ export const login = async (req, res) => {
         if (!user) {
             return res.status(401).json({ error: "Credenciales inválidas" });
         }
-        const token = jwt.sign({ id: user.id_username, rol: user.rol }, process.env.JWT_SECRET, { expiresIn: "7d" });
+        const token = jwt.sign({ id: user.id_username, rol: user.rol }, process.env.JWT_SECRET, { expiresIn: "1d" });
         res.json({
             usuario: {
                 id: user.id_username,

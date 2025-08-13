@@ -4,7 +4,6 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import usuarios from '../data/usuarios';
 import { UserContext } from '../context/UserContext';
 
 const Login = ({ onLoginSuccess }) => {
@@ -12,9 +11,9 @@ const Login = ({ onLoginSuccess }) => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
     const [mensaje, setMensaje] = useState('');
-    const { setUser } = useContext(UserContext);
+    const { setUser, setToken } = useContext(UserContext);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
     if (!username.trim() || !password.trim()) {
@@ -29,25 +28,36 @@ const Login = ({ onLoginSuccess }) => {
         return;
     }
 
-    const usuarioEncontrado = usuarios.find(
-        (usuario) => usuario.username === username && usuario.password === password
-    );
+    try {
+        const response = await fetch('http://localhost:3000/usuarios/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ mail: username, password }),
+        });
 
-    if (!usuarioEncontrado) {
-        setError(true);
-        setMensaje('Usuario o contraseña incorrectos');
-        return;
-    }
+        const data = await response.json();
 
-    if (usuarioEncontrado) {
-        setUser(usuarioEncontrado); // <-- setUser viene de tu UserContext
+        if (!response.ok) {
+            setError(true);
+            setMensaje(data.error || 'Usuario o contraseña incorrectos');
+            return;
+        }
+
+        setUser(data.usuario);
+        if (typeof setToken === 'function' && data.token) {
+            setToken(data.token);
+        }
         setError(false);
         setMensaje('Ingreso Exitoso');
         setTimeout(() => {
             onLoginSuccess();
         }, 2000);
+    } catch {
+        setError(true);
+        setMensaje('Error de conexión con el servidor');
     }
 };
+
 
 return (
     <>
@@ -94,9 +104,10 @@ return (
                 </div>
 
                 <Boton
-                    texto="Login"
+                    texto="Ingresar"
+                    type="submit"
+                    variante="outline-dark text-dark mt-4 auth-btn"
                     onClick={handleSubmit}
-                    variante="outline-dark text-dark mt-4"
                 />
 
                 <div className="register-link">
