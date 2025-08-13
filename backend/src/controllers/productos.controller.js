@@ -4,13 +4,13 @@ export const getProducts = async (req, res) => {
     try {
         const productos = await productosModel.getProducts();
         const productosFront = productos.map(p => ({
-        id: p.id_producto,
-        name: p.nombre,
-        price: p.precio,
-        stock: p.stock,
-        category: p.categoria,
-        img: p.img,
-        description: p.descripcion
+            id: p.id_producto,
+            name: p.nombre,
+            price: p.precio,
+            stock: p.stock,
+            category: p.categoria,
+            img: p.img,
+            description: p.descripcion
         }));
         res.json(productosFront);
     } catch (error) {
