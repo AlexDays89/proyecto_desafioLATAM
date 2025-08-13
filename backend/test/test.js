@@ -13,3 +13,28 @@ describe('GET /productos', () => {
         });
     });
 });
+
+describe('GET /productos/:id', () => {
+    it('debe devolver un producto por id', async () => {
+        const res = await request(app).get('/productos/1');
+        console.log('Detalle producto:', res.body);
+        if (res.statusCode !== 200) throw new Error('Status incorrecto');
+        if (!res.body.id || !res.body.name) throw new Error('Faltan campos');
+    });
+});
+
+describe('POST /productos', () => {
+    it('debe crear un nuevo producto', async () => {
+        const res = await request(app).post('/productos').send({
+            name: 'Producto A',
+            price: 1000,
+            stock: 10,
+            category: 'Electrónica',
+            img: 'https://ejemplo.com/img.jpg',
+            description: 'Descripción del producto'
+        });
+        console.log('Respuesta:', res.body);
+        if (res.statusCode !== 201) throw new Error('Status incorrecto');
+        if (!res.body.id || !res.body.name) throw new Error('Faltan campos');
+    });
+});
