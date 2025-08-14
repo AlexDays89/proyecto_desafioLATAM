@@ -59,3 +59,62 @@ describe('POST /productos', () => {
         }
     });
 });
+
+describe('PUT /usuarios/perfil', () => {
+    let token;
+    let originalProfile;
+
+    before(async () => {
+        // Login para obtener token
+        const loginRes = await request(app).post('/usuarios/login').send({
+            mail: 'admin@gmail.com',
+            password: 'admin123'
+        });
+        token = loginRes.body.token;
+        if (!token) throw new Error('No se pudo obtener token de login');
+
+        // Obtener perfil original
+        const profileRes = await request(app)
+            .get('/usuarios/perfil')
+            .set('Authorization', `Bearer ${token}`);
+        originalProfile = profileRes.body;
+    });
+
+    it('debe actualizar el perfil y luego restaurar los datos', async () => {
+        // Actualizar perfil
+        const updateRes = await request(app)
+            .put('/usuarios/perfil')
+            .set('Authorization', `Bearer ${token}`)
+            .send({
+                nombre: 'NuevoNombreTest',
+                apellido: 'NuevoApellidoTest',
+                direccion: 'Nueva Direccion Test',
+                mail: originalProfile.mail // no cambiamos el mail
+            });
+        console.log('Respuesta update:', updateRes.body);
+        if (updateRes.statusCode !== 200) throw new Error('Status incorrecto al actualizar');
+
+        // Verificar cambio
+        const verifyRes = await request(app)
+            .get('/usuarios/perfil')
+            .set('Authorization', `Bearer ${token}`);
+        if (verifyRes.body.nombre !== 'NuevoNombreTest') throw new Error('No se actualizó el nombre');
+
+        // Rollback: restaurar datos originales
+        await request(app)
+            .put('/usuarios/perfil')
+            .set('Authorization', `Bearer ${token}`)
+            .send({
+                nombre: originalProfile.nombre,
+                apellido: originalProfile.apellido,
+                direccion: originalProfile.direccion,
+                mail: originalProfile.mail
+            });
+
+        // Verificar rollback
+        const rollbackRes = await request(app)
+            .get('/usuarios/perfil')
+            .set('Authorization', `Bearer ${token}`);
+        if (rollbackRes.body.nombre !== originalProfile.nombre) throw new Error('No se restauró el nombre original');
+    });
+});

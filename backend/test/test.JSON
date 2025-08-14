@@ -1,0 +1,135 @@
+[
+    {
+      "test": "GET /productos",
+      "request": {
+        "method": "GET",
+        "url": "/productos"
+      },
+      "response": {
+        "status": 200,
+        "body": [
+          {
+            "id": 1,
+            "name": "Lectura Rápida - 1 Pregunta",
+            "price": "2000.00",
+            "stock": 100,
+            "category": "Lecturas de Tarot",
+            "img": "https://asew.cl/imgproyectofinal/lecturarapida.jpg",
+            "description": "Consulta rápida y directa para resolver una pregunta específica. Ideal para obtener claridad inmediata sobre situaciones puntuales en tu vida."
+          },
+          {
+            "id": 2,
+            "name": "Lectura Rápida - Oferta 3 Preguntas",
+            "price": "5000.00",
+            "stock": 100,
+            "category": "Lecturas de Tarot",
+            "img": "https://asew.cl/imgproyectofinal/lroferta.jpg",
+            "description": "Paquete especial que incluye tres preguntas en una sola sesión. Perfecto para explorar diferentes aspectos de tu vida con un precio preferencial."
+          }
+        ]
+      },
+      "result": "✔ debe devolver un array de productos"
+    },
+    {
+      "test": "GET /productos/:id",
+      "request": {
+        "method": "GET",
+        "url": "/productos/1"
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "id": 1,
+          "name": "Lectura Rápida - 1 Pregunta",
+          "price": "2000.00",
+          "stock": 100,
+          "category": "Lecturas de Tarot",
+          "img": "https://asew.cl/imgproyectofinal/lecturarapida.jpg",
+          "description": "Consulta rápida y directa para resolver una pregunta específica. Ideal para obtener claridad inmediata sobre situaciones puntuales en tu vida."
+        }
+      },
+      "result": "✔ debe devolver un producto por id"
+    },
+    {
+      "test": "POST /productos",
+      "request": {
+        "method": "POST",
+        "url": "/productos",
+        "body": {
+          "name": "Producto A",
+          "price": 1000,
+          "stock": 10,
+          "category": "Electrónica",
+          "img": "https://ejemplo.com/img.jpg",
+          "description": "Descripción del producto"
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": {
+          "id": 7,
+          "name": "Producto A",
+          "price": "1000.00",
+          "stock": 10,
+          "category": "Electrónica",
+          "img": "https://ejemplo.com/img.jpg",
+          "description": "Descripción del producto"
+        }
+      },
+      "result": "✔ debe crear un nuevo producto"
+    },
+    {
+      "test": "PUT /usuarios/perfil (update y rollback)",
+      "request": {
+        "method": "PUT",
+        "url": "/usuarios/perfil",
+        "headers": {
+          "Authorization": "Bearer <JWT_TOKEN>"
+        },
+        "body": {
+          "nombre": "NuevoNombreTest",
+          "apellido": "NuevoApellidoTest",
+          "direccion": "Nueva Direccion Test",
+          "mail": "admin@gmail.com"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "id_username": 1,
+          "username": "admin@gmail.com",
+          "mail": "admin@gmail.com",
+          "rol": "admin",
+          "nombre": "NuevoNombreTest",
+          "apellido": "NuevoApellidoTest",
+          "direccion": "Nueva Direccion Test"
+        }
+      },
+      "rollback": {
+        "method": "PUT",
+        "url": "/usuarios/perfil",
+        "headers": {
+          "Authorization": "Bearer <JWT_TOKEN>"
+        },
+        "body": {
+          "nombre": "<nombre original>",
+          "apellido": "<apellido original>",
+          "direccion": "<direccion original>",
+          "mail": "admin@gmail.com"
+        },
+        "response": {
+          "status": 200,
+          "body": {
+            "id_username": 1,
+            "username": "admin@gmail.com",
+            "mail": "admin@gmail.com",
+            "rol": "admin",
+            "nombre": "<nombre original>",
+            "apellido": "<apellido original>",
+            "direccion": "<direccion original>"
+          }
+        }
+      },
+      "result": "✔ debe actualizar el perfil y luego restaurar los datos"
+    }
+  ]
