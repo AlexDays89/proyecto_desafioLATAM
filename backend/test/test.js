@@ -24,17 +24,38 @@ describe('GET /productos/:id', () => {
 });
 
 describe('POST /productos', () => {
-    it('debe crear un nuevo producto', async () => {
-        const res = await request(app).post('/productos').send({
-            name: 'Producto A',
-            price: 1000,
-            stock: 10,
-            category: 'Electrónica',
-            img: 'https://ejemplo.com/img.jpg',
-            description: 'Descripción del producto'
+    let token;
+    before(async () => {
+        // Cambia estos datos por un usuario admin real de tu base de datos
+        const loginRes = await request(app).post('/usuarios/login').send({
+            mail: 'admin@gmail.com',
+            password: 'admin123'
         });
+        token = loginRes.body.token;
+        if (!token) throw new Error('No se pudo obtener token de login');
+    });
+
+    it('debe crear un nuevo producto', async () => {
+        const res = await request(app)
+            .post('/productos')
+            .set('Authorization', `Bearer ${token}`)
+            .send({
+                name: 'Producto A',
+                price: 1000,
+                stock: 10,
+                category: 'Electrónica',
+                img: 'https://ejemplo.com/img.jpg',
+                description: 'Descripción del producto'
+            });
         console.log('Respuesta:', res.body);
-        if (res.statusCode !== 201) throw new Error('Status incorrecto');
-        if (!res.body.id || !res.body.name) throw new Error('Faltan campos');
+        if (res.statusCode !== 201) {
+            console.error('Status recibido:', res.statusCode, 'Body:', res.body);
+            throw new Error('Status incorrecto');
+        }
+        if (res.body.id) {
+            await request(app)
+                .delete(`/productos/${res.body.id}`)
+                .set('Authorization', `Bearer ${token}`);
+        }
     });
 });

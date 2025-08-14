@@ -11,21 +11,30 @@ export const getProductById = async (id) => {
 };
 
 export const createProduct = async (product) => {
+    // Mapear los nombres del frontend a los nombres de la base de datos
+    const dbProduct = {
+        nombre: product.name,
+        precio: product.price,
+        stock: product.stock,
+        categoria: product.category,
+        img: product.img,
+        descripcion: product.description
+    };
     const result = await pool.query(
-        "INSERT INTO productos (nombre, precio, stock, categoria, img) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-        [product.nombre, product.precio, product.stock, product.categoria, product.img]
+        "INSERT INTO productos (nombre, precio, stock, categoria, img, descripcion) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+        [dbProduct.nombre, dbProduct.precio, dbProduct.stock, dbProduct.categoria, dbProduct.img, dbProduct.descripcion]
     );
     return result.rows[0];
 };
 
 export const updateProduct = async (id, product) => {
     const result = await pool.query(
-        "UPDATE productos SET nombre = $2, precio = $3, stock = $4, categoria = $5, img = $6 WHERE id_producto = $1 RETURNING *",
-        [id, product.nombre, product.precio, product.stock, product.categoria, product.img]
+        "UPDATE productos SET nombre = $2, precio = $3, stock = $4, categoria = $5, img = $6, descripcion = $7 WHERE id_producto = $1 RETURNING *",
+        [id, product.name, product.price, product.stock, product.category, product.img, product.description]
     );
     return result.rows[0] ? { id: result.rows[0].id_producto, nombre: result.rows[0].nombre, precio: result.rows[0].precio, stock: result.rows[0].stock, categoria: result.rows[0].categoria, img: result.rows[0].img } : null;
 };
-
+    
 export const deleteProduct = async (id) => {
     const result = await pool.query("DELETE FROM productos WHERE id_producto = $1 RETURNING *", [id]);
     return result.rows[0];

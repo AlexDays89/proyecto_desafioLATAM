@@ -43,6 +43,7 @@ export const getProductById = async (req, res) => {
 
 export const createProduct = async (req, res) => {
     try {
+        console.log('[createProduct] body recibido:', req.body);
         const { name, price, stock, category, img, description } = req.body;
         const newProduct = await productosModel.createProduct({ name, price, stock, category, img, description });
         const productFront = {
@@ -56,7 +57,8 @@ export const createProduct = async (req, res) => {
         };
         res.status(201).json(productFront);
     } catch (error) {
-        res.status(500).json({ error: "Error al crear el producto" });
+        console.error('[createProduct] error:', error);
+        res.status(500).json({ error: "Error al crear el producto", detalle: error.message });
     }
 };
 

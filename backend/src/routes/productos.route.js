@@ -7,5 +7,6 @@ router.get("/", productosControllers.getProducts);
 router.get("/:id", productosControllers.getProductById);
 router.put("/:id", authMiddleware, adminMiddleware, productosControllers.updateProduct);
 router.delete("/:id", authMiddleware, adminMiddleware, productosControllers.deleteProduct);
+router.post("/", authMiddleware, adminMiddleware, productosControllers.createProduct);
 
 export default router;

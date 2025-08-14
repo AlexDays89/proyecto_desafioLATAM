@@ -10,13 +10,13 @@ CREATE TABLE usuarios (
 );
 
 CREATE TABLE carritos_activos (
-    id_carrito INTEGER PRIMARY KEY,
+    id_carrito SERIAL PRIMARY KEY,
     id_usuario INTEGER UNIQUE NOT NULL,
     CONSTRAINT fk_carritos_activos_id_usuario_usuarios FOREIGN KEY (id_usuario) REFERENCES usuarios(id_username)
 );
 
 CREATE TABLE compras (
-    id_compra INTEGER PRIMARY KEY,
+    id_compra SERIAL PRIMARY KEY,
     id_usuario INTEGER NOT NULL,
     fecha_compra TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     total INTEGER NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE compras (
 );
 
 CREATE TABLE productos (
-    id_producto INTEGER PRIMARY KEY,
+    id_producto SERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     precio INTEGER NOT NULL,
     stock INTEGER NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE productos (
 );
 
 CREATE TABLE carrito_items (
-    id_item INTEGER PRIMARY KEY,
+    id_item SERIAL PRIMARY KEY,
     id_compra INTEGER NOT NULL,
     id_producto INTEGER NOT NULL,
     cantidad INTEGER NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE carrito_items (
 );
 
 CREATE TABLE carrito_activo_items (
-    id_item INTEGER PRIMARY KEY,
+    id_item SERIAL PRIMARY KEY,
     id_carrito INTEGER NOT NULL,
     id_producto INTEGER NOT NULL,
     cantidad INTEGER NOT NULL,
