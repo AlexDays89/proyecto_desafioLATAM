@@ -13,7 +13,7 @@ const Navbar = () => {
 const { token, setToken, user, setUser} = useContext(UserContext);
 const navigate = useNavigate();
 const handleLogout = () => { 
-  console.log('[Navbar] handleLogout: setToken(null), setUser(null)');
+  
   setToken(null);
   setUser(null);
 };
