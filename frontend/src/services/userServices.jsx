@@ -4,7 +4,7 @@ export async function login(data) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error("Login failed");
+    if (!res.ok) throw new Error("Error del Login");
     return res.json();
 }
 
@@ -14,7 +14,7 @@ export async function register(data) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error("Register failed");
+    if (!res.ok) throw new Error("Error del Register");
     return res.json();
 }
 
@@ -22,7 +22,7 @@ export async function getProfile(token) {
     const res = await fetch("http://localhost:3000/usuarios/perfil", {
         headers: { Authorization: `Bearer ${token}` },
     });
-    if (!res.ok) throw new Error("Get profile failed");
+    if (!res.ok) throw new Error("Error al obtener el perfil");
     return res.json();
 }
 
@@ -35,6 +35,6 @@ export async function updateProfile(token, data) {
         },
         body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error("Update profile failed");
+    if (!res.ok) throw new Error("Error al actualizar el perfil");
     return res.json();
 }

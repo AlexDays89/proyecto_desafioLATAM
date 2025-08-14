@@ -43,14 +43,17 @@ const Login = ({ onLoginSuccess }) => {
             return;
         }
 
-        setUser(data.usuario);
+        console.log('data.usuario:', data.usuario, 'typeof:', typeof data.usuario);
+        console.log('data.token:', data.token, 'typeof:', typeof data.token);
+        if (data.usuario) 
+            setUser(data.usuario);
         if (typeof setToken === 'function' && data.token) {
             setToken(data.token);
         }
         setError(false);
         setMensaje('Ingreso Exitoso');
         setTimeout(() => {
-            onLoginSuccess();
+            onLoginSuccess(data.token, data.usuario);
         }, 2000);
     } catch {
         setError(true);
