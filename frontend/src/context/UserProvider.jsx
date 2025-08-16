@@ -9,7 +9,7 @@ const UserProvider = ({ children }) => {
     });
 
     const setToken = (value) => {
-        
+        console.log('[UserProvider] setToken llamado con:', value);
         if (value === undefined || value === null || value === "") {
             setTokenState(null);
             localStorage.removeItem("token");
@@ -22,7 +22,7 @@ const UserProvider = ({ children }) => {
     };
 
     const setUser = (value) => {
-        
+        console.log('[UserProvider] setUser llamado con:', value);
         if (value === undefined || value === null) {
             setUserState(null);
             localStorage.removeItem("user");

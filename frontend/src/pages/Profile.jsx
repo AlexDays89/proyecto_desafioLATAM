@@ -29,7 +29,7 @@ function Profile() {
     }, [user]);
 
     const handleLogout = () => {
-        
+        console.log('[Profile] handleLogout: setToken(false)');
         setToken(false);
     };
 

@@ -43,10 +43,10 @@ const Login = ({ onLoginSuccess }) => {
             return;
         }
 
-        
-        
+        console.log('data.usuario:', data.usuario, 'typeof:', typeof data.usuario);
         if (data.usuario) 
             setUser(data.usuario);
+        console.log('data.token:', data.token, 'typeof:', typeof data.token);
         if (typeof setToken === 'function' && data.token) {
             setToken(data.token);
         }
