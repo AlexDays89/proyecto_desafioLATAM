@@ -1,5 +1,7 @@
+import { api } from "../lib/api.js";
+
 export async function login(data) {
-    const res = await fetch("http://localhost:3000/usuarios/login", {
+    const res = await api("usuarios/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -9,7 +11,7 @@ export async function login(data) {
 }
 
 export async function register(data) {
-    const res = await fetch("http://localhost:3000/usuarios/register", {
+    const res = await api("usuarios/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -19,7 +21,7 @@ export async function register(data) {
 }
 
 export async function getProfile(token) {
-    const res = await fetch("http://localhost:3000/usuarios/perfil", {
+    const res = await api("usuarios/perfil", {
         headers: { Authorization: `Bearer ${token}` },
     });
     if (!res.ok) throw new Error("Error al obtener el perfil");
@@ -27,7 +29,7 @@ export async function getProfile(token) {
 }
 
 export async function updateProfile(token, data) {
-    const res = await fetch("http://localhost:3000/usuarios/perfil", {
+    const res = await api("usuarios/perfil", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
