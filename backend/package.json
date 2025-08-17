@@ -7,7 +7,7 @@
   "scripts": {
     "test": "mocha",
     "dev": "nodemon index.js",
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "engines": { "node": "20.x" },
   "keywords": [],
