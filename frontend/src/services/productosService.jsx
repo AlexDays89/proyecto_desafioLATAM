@@ -1,4 +1,4 @@
-import { api } from "@/lib/api";
+import { api } from "../lib/api.js";
 
 export async function getProductos() {
     const res = await api("/productos");

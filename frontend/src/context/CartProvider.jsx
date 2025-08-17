@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { CartContext } from "./CartContext";
 import productosMock from "../data/productos";
-import { api } from "../lib/api";
+import { api } from "../lib/api.js";
 
 const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
