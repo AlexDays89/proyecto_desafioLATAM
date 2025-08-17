@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { api } from "../lib/api.js";
 
 const Admin = () => {
-    const [productos, setProductos] = useState(api("productos"));
+    const [productos, setProductos] = useState([]);
     const [nuevoProducto, setNuevoProducto] = useState({
         name: "",
         price: "",
@@ -17,6 +17,23 @@ const Admin = () => {
     const [editProducto, setEditProducto] = useState({}); // Producto a editar
     const [showModal, setShowModal] = useState(false); // Mostrar modal de edición
     const [showDeleteModal, setShowDeleteModal] = useState(false); // Mostrar modal de eliminación
+
+    // Fetch productos al montar el componente
+    useEffect(() => {
+        const fetchProductos = async () => {
+            try {
+                const data = await api("/productos");
+                if (Array.isArray(data)) {
+                    setProductos(data);
+                } else {
+                    setProductos([]);
+                }
+            } catch {
+                setProductos([]);
+            }
+        };
+        fetchProductos();
+    }, []);
 
     // Manejar inputs para nuevo producto
     const handleInputChange = (e) => {
