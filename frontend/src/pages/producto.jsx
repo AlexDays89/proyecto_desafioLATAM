@@ -20,8 +20,7 @@ const Producto = () => {
             try {
                 const res = await api(`/productos/${id}`);
                 if (!res.ok) throw new Error("No se encontró el producto");
-                const data = await res.json();
-                setProducto(data);
+                setProducto(res);
             } catch {
                 setProducto(null);
             } finally {
