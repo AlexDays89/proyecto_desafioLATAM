@@ -3,7 +3,7 @@ import CardProducto from "./cardproducto";
 import { Container, Row, Col, Dropdown, DropdownButton, Form, Button, Spinner } from "react-bootstrap";
 import { useCart } from "../context/useCart";
 import { useSearchParams } from "react-router-dom";
-import { api } from "../lib/api";
+import { api } from "../lib/api.js";
 
 const VistaProductos = () => {
   const [searchParams] = useSearchParams();
