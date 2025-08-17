@@ -17,8 +17,7 @@ const VistaProductos = () => {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const res = await api("/productos");
-        const data = await res.json();
+        const data = await api("/productos");
         setProductos(data);
       } catch {
         setProductos([]);
