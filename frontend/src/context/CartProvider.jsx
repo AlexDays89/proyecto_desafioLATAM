@@ -15,8 +15,7 @@ const CartProvider = ({ children }) => {
         try {
             const res = await api("productos");
             if (!res.ok) throw new Error('API error');
-            const data = await res.json();
-            setProductos(data);
+            setProductos(res);
         } catch (error) {
             console.warn("Fallo la API, usando mock de productos:", error);
             setProductos(productosMock);
