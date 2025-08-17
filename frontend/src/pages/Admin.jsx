@@ -27,7 +27,6 @@ const Admin = () => {
     // Manejar subida de imagen al crear
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        if (!file) return;
         const reader = new FileReader();
         reader.onloadend = () => {
             setNuevoProducto((prev) => ({ ...prev, img: reader.result }));
@@ -74,7 +73,6 @@ const Admin = () => {
     // Manejar subida de imagen en edición
     const handleEditFileChange = (e) => {
         const file = e.target.files[0];
-        if (!file) return;
         const reader = new FileReader();
         reader.onloadend = () => {
             setEditProducto((prev) => ({ ...prev, img: reader.result }));
