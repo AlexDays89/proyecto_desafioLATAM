@@ -5,6 +5,7 @@ import Footer from '../components/footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../context/UserContext';
+import { api } from '../lib/api.js';
 
 const Register = ({ onRegisterSuccess }) => {
   const [username, setUsername] = useState('');
@@ -46,36 +47,33 @@ const Register = ({ onRegisterSuccess }) => {
     };
   
     try {
-      const response = await fetch('http://localhost:3000/usuarios/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData),
-      });
-  
-      if (!response.ok) {
-        const data = await response.json();
-        setError(true);
-        setMensaje(data.error || 'Error en el registro');
-        return;
-      }
-  
-      const data = await response.json();
-      setUser(data.usuario);
-      if (typeof setToken === 'function' && data.token) {
-        setToken(data.token);
-      }
-      setError(false);
-      setMensaje('Registro Exitoso');
-      setTimeout(() => {
-        onRegisterSuccess();
-      }, 2000);
-      // Redirigir o limpiar formulario si quieres
-    } catch (error) {
-      console.error(error);
+    const response = await api('usuarios/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData),
+    });
+
+    if (response.error) {
       setError(true);
-      setMensaje('Error de conexión con el servidor');
+      setMensaje(response.error || 'Error en el registro');
+      return;
     }
-  };
+
+    setUser(response.usuario);
+    if (typeof setToken === 'function' && response.token) {
+      setToken(response.token);
+    }
+    setError(false);
+    setMensaje('Registro Exitoso');
+    setTimeout(() => {
+      onRegisterSuccess();
+    }, 2000);
+  } catch (error) {
+    console.error(error);
+    setError(true);
+    setMensaje('Error de conexión con el servidor');
+  }
+};
 
   return (
     <>

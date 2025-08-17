@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { CartContext } from "./CartContext";
 import productosMock from "../data/productos";
+import { api } from "../lib/api.js";
 
 const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
@@ -12,11 +13,9 @@ const CartProvider = ({ children }) => {
 
     const consultarApi = async () => {
         try {
-            const url = "http://localhost:3000/productos";
-            const res = await fetch(url);
-            if (!res.ok) throw new Error('API error');
-            const data = await res.json();
-            setProductos(data);
+            const res = await api("productos");
+            if (res.error) throw new Error('API error');
+            setProductos(res);
         } catch (error) {
             console.warn("Fallo la API, usando mock de productos:", error);
             setProductos(productosMock);

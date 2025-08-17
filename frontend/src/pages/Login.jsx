@@ -5,6 +5,7 @@ import Footer from '../components/footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../context/UserContext';
+import { api } from '../lib/api.js';
 
 const Login = ({ onLoginSuccess }) => {
     const [username, setUsername] = useState('');
@@ -29,31 +30,29 @@ const Login = ({ onLoginSuccess }) => {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/usuarios/login', {
+        const response = await api('usuarios/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ mail: username, password }),
         });
 
-        const data = await response.json();
-
-        if (!response.ok) {
+        if (response.error) {
             setError(true);
-            setMensaje(data.error || 'Usuario o contraseña incorrectos');
+            setMensaje(response.error || 'Usuario o contraseña incorrectos');
             return;
         }
 
+        if (response.usuario) {
+            setUser(response.usuario);
+        }
         
-        
-        if (data.usuario) 
-            setUser(data.usuario);
-        if (typeof setToken === 'function' && data.token) {
-            setToken(data.token);
+        if (typeof setToken === 'function' && response.token) {
+            setToken(response.token);
         }
         setError(false);
         setMensaje('Ingreso Exitoso');
         setTimeout(() => {
-            onLoginSuccess(data.token, data.usuario);
+            onLoginSuccess(response.token, response.usuario);
         }, 2000);
     } catch {
         setError(true);

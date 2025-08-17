@@ -4,6 +4,7 @@ import Boton from '../components/boton';
 import { UserContext } from '../context/UserContext';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
+import { api } from '../lib/api.js';
 
 function Profile() {
     const { setToken, user, setUser, token } = useContext(UserContext);
@@ -55,7 +56,7 @@ function Profile() {
 
     const handleSave = async () => {
         try {
-            const response = await fetch('http://localhost:3000/usuarios/perfil', {
+            const response = await api('usuarios/perfil', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -63,14 +64,12 @@ function Profile() {
                 },
                 body: JSON.stringify(form)
             });
-            if (!response.ok) {
-                const data = await response.json();
+            if (response.error) {
                 setError(true);
-                setMensaje(data.error || 'Error al actualizar perfil');
+                setMensaje(response.error || 'Error al actualizar perfil');
                 return;
             }
-            const data = await response.json();
-            setUser({ ...user, ...data });
+            setUser({ ...user, ...response });
             setMensaje('Perfil actualizado con éxito');
             setError(false);
             setEdit(false);

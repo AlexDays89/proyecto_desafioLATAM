@@ -1,6 +1,7 @@
 import { Router } from "express";
 import * as productosControllers from "../controllers/productos.controller.js";
 import { authMiddleware, adminMiddleware } from "../middlewares/auth.middleware.js";
+
 const router = Router();
 
 router.get("/", productosControllers.getProducts);
