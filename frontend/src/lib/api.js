@@ -15,5 +15,4 @@ export async function api(path, opts = {}) {
     }
   // intenta JSON, si falla devuelve texto
     try { return await res.json(); } catch { return await res.text(); }
-   
 }
