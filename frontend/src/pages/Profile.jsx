@@ -65,12 +65,10 @@ function Profile() {
                 body: JSON.stringify(form)
             });
             if (!response.ok) {
-                const data = await response.json();
                 setError(true);
                 setMensaje(data.error || 'Error al actualizar perfil');
                 return;
             }
-            const data = await response.json();
             setUser({ ...user, ...data });
             setMensaje('Perfil actualizado con éxito');
             setError(false);
