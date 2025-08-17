@@ -6,6 +6,9 @@ if (process.env.DATABASE_URL) {
     const { URL } = globalThis;
     const url = new URL(process.env.DATABASE_URL);
 
+    const dns = await import("dns/promises");
+    const { address } = await dns.lookup(url.hostname, { family: 4 });
+
     const port = url.port ? Number(url.port) : 5432;
     const database = url.pathname.replace(/^\//, "");
 
