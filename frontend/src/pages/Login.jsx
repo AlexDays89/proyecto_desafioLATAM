@@ -36,7 +36,7 @@ const Login = ({ onLoginSuccess }) => {
             body: JSON.stringify({ mail: username, password }),
         });
 
-        if (!response.ok) {
+        if (response.error) {
             setError(true);
             setMensaje(response.error || 'Usuario o contraseña incorrectos');
             return;

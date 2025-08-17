@@ -64,7 +64,7 @@ function Profile() {
                 },
                 body: JSON.stringify(form)
             });
-            if (!response.ok) {
+            if (response.error) {
                 setError(true);
                 setMensaje(response.error || 'Error al actualizar perfil');
                 return;

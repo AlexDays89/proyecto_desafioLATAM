@@ -16,7 +16,7 @@ export async function register(data) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error("Error del Register");
+    if (res.error) throw new Error("Error del Register");
     return res.json();
 }
 
@@ -24,7 +24,7 @@ export async function getProfile(token) {
     const res = await api("usuarios/perfil", {
         headers: { Authorization: `Bearer ${token}` },
     });
-    if (!res.ok) throw new Error("Error al obtener el perfil");
+    if (res.error) throw new Error("Error al obtener el perfil");
     return res.json();
 }
 
@@ -37,6 +37,6 @@ export async function updateProfile(token, data) {
         },
         body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error("Error al actualizar el perfil");
+    if (res.error) throw new Error("Error al actualizar el perfil");
     return res.json();
 }

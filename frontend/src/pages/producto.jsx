@@ -19,7 +19,7 @@ const Producto = () => {
         const fetchProducto = async () => {
             try {
                 const res = await api(`/productos/${id}`);
-                if (!res.ok) throw new Error("No se encontró el producto");
+                if (res.error) throw new Error(res.error);
                 setProducto(res);
             } catch {
                 setProducto(null);
