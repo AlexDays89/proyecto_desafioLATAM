@@ -36,25 +36,23 @@ const Login = ({ onLoginSuccess }) => {
             body: JSON.stringify({ mail: username, password }),
         });
 
-        const data = await response.json();
-
         if (!response.ok) {
             setError(true);
-            setMensaje(data.error || 'Usuario o contraseña incorrectos');
+            setMensaje(response.error || 'Usuario o contraseña incorrectos');
             return;
         }
 
         
         
-        if (data.usuario) 
-            setUser(data.usuario);
-        if (typeof setToken === 'function' && data.token) {
-            setToken(data.token);
+        if (response.usuario) 
+            setUser(response.usuario);
+        if (typeof setToken === 'function' && response.token) {
+            setToken(response.token);
         }
         setError(false);
         setMensaje('Ingreso Exitoso');
         setTimeout(() => {
-            onLoginSuccess(data.token, data.usuario);
+            onLoginSuccess(response.token, response.usuario);
         }, 2000);
     } catch {
         setError(true);
