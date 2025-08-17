@@ -42,10 +42,10 @@ const Login = ({ onLoginSuccess }) => {
             return;
         }
 
-        
-        
-        if (response.usuario) 
+        if (response.usuario) {
             setUser(response.usuario);
+        }
+        
         if (typeof setToken === 'function' && response.token) {
             setToken(response.token);
         }
