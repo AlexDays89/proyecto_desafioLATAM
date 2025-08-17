@@ -5,7 +5,7 @@ import { useCart } from "../context/useCart";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Boton from "../components/boton";
-import { api } from "../lib/api";
+import { api } from "../lib/api.js";
 
 const Producto = () => {
     const { id } = useParams();

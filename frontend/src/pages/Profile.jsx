@@ -4,7 +4,7 @@ import Boton from '../components/boton';
 import { UserContext } from '../context/UserContext';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
-import { api } from '../lib/api';
+import { api } from '../lib/api.js';
 
 function Profile() {
     const { setToken, user, setUser, token } = useContext(UserContext);

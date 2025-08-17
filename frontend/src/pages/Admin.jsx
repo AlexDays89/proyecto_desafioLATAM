@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import productosData from "../data/productos";
+import { api } from "../lib/api.js";
 
 const Admin = () => {
-    const [productos, setProductos] = useState(productosData);
+    const [productos, setProductos] = useState(api("productos"));
     const [nuevoProducto, setNuevoProducto] = useState({
         name: "",
         price: "",
@@ -12,9 +12,11 @@ const Admin = () => {
         category: "",
         img: "",
     });
-    const [editIndex, setEditIndex] = useState(null);
-    const [editProducto, setEditProducto] = useState({});
-    const [showModal, setShowModal] = useState(false);
+    const [deleteId, setDeleteId] = useState(null); // ID del producto a Eliminar
+    const [editIndex, setEditIndex] = useState(null); // Índice del producto a editar
+    const [editProducto, setEditProducto] = useState({}); // Producto a editar
+    const [showModal, setShowModal] = useState(false); // Mostrar modal de edición
+    const [showDeleteModal, setShowDeleteModal] = useState(false); // Mostrar modal de eliminación
 
     // Manejar inputs para nuevo producto
     const handleInputChange = (e) => {
@@ -36,12 +38,10 @@ const Admin = () => {
     // Añadir producto
     const handleAddProduct = (e) => {
         e.preventDefault();
-        setProductos([...productos, { ...nuevoProducto, id: Date.now() }]);
+        const newProduct = { ...nuevoProducto, id: Date.now() };
+        setProductos([...productos, newProduct]);
         setNuevoProducto({ name: "", price: "", stock: "", category: "", img: "" });
     };
-
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [deleteId, setDeleteId] = useState(null);
 
     // Eliminar producto (muestra modal)
     const handleDeleteProduct = (id) => {
@@ -59,6 +59,7 @@ const Admin = () => {
         setShowDeleteModal(false);
         setDeleteId(null);
     };
+
     // Abrir modal de edición
     const handleEditClick = (index) => {
         setEditIndex(index);

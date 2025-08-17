@@ -13,8 +13,7 @@ const CartProvider = ({ children }) => {
 
     const consultarApi = async () => {
         try {
-            const url = "productos";
-            const res = await api(url);
+            const res = await api("productos");
             if (!res.ok) throw new Error('API error');
             const data = await res.json();
             setProductos(data);
