@@ -8,10 +8,12 @@ export async function api(path, opts = {}) {
         // credentials: "include",
         ...opts,
     });
+    console.log("API BASE URL:", BASE);
     if (!res.ok) {
     const text = await res.text().catch(() => "");
     throw new Error(`API ${res.status} ${res.statusText} → ${text}`);
     }
   // intenta JSON, si falla devuelve texto
     try { return await res.json(); } catch { return await res.text(); }
+   
 }
