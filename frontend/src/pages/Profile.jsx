@@ -66,10 +66,10 @@ function Profile() {
             });
             if (!response.ok) {
                 setError(true);
-                setMensaje(data.error || 'Error al actualizar perfil');
+                setMensaje(response.error || 'Error al actualizar perfil');
                 return;
             }
-            setUser({ ...user, ...data });
+            setUser({ ...user, ...response });
             setMensaje('Perfil actualizado con éxito');
             setError(false);
             setEdit(false);
