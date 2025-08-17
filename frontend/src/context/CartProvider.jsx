@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { CartContext } from "./CartContext";
 import productosMock from "../data/productos";
+import { api } from "../lib/api";
 
 const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
@@ -12,8 +13,8 @@ const CartProvider = ({ children }) => {
 
     const consultarApi = async () => {
         try {
-            const url = "http://localhost:3000/productos";
-            const res = await fetch(url);
+            const url = "productos";
+            const res = await api(url);
             if (!res.ok) throw new Error('API error');
             const data = await res.json();
             setProductos(data);

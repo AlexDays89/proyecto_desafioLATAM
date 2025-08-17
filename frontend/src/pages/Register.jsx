@@ -5,6 +5,7 @@ import Footer from '../components/footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../context/UserContext';
+import { api } from '../lib/api';
 
 const Register = ({ onRegisterSuccess }) => {
   const [username, setUsername] = useState('');
@@ -46,7 +47,7 @@ const Register = ({ onRegisterSuccess }) => {
     };
   
     try {
-      const response = await fetch('http://localhost:3000/usuarios/register', {
+      const response = await api('usuarios/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),

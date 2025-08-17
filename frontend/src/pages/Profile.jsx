@@ -4,6 +4,7 @@ import Boton from '../components/boton';
 import { UserContext } from '../context/UserContext';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
+import { api } from '../lib/api';
 
 function Profile() {
     const { setToken, user, setUser, token } = useContext(UserContext);
@@ -55,7 +56,7 @@ function Profile() {
 
     const handleSave = async () => {
         try {
-            const response = await fetch('http://localhost:3000/usuarios/perfil', {
+            const response = await api('usuarios/perfil', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

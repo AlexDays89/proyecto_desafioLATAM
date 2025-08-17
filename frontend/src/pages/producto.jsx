@@ -5,6 +5,7 @@ import { useCart } from "../context/useCart";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Boton from "../components/boton";
+import { api } from "../lib/api";
 
 const Producto = () => {
     const { id } = useParams();
@@ -17,7 +18,7 @@ const Producto = () => {
     useEffect(() => {
         const fetchProducto = async () => {
             try {
-                const res = await fetch(`http://localhost:3000/productos/${id}`);
+                const res = await api(`/productos/${id}`);
                 if (!res.ok) throw new Error("No se encontró el producto");
                 const data = await res.json();
                 setProducto(data);
