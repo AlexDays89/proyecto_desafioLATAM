@@ -1,5 +1,7 @@
 import request from 'supertest';
 import app from '../src/server.js';
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
 
 describe('GET /productos', () => {
     it('debe devolver un array de productos', async () => {
@@ -26,13 +28,12 @@ describe('GET /productos/:id', () => {
 describe('POST /productos', () => {
     let token;
     before(async () => {
-        // Cambia estos datos por un usuario admin real de tu base de datos
+
         const loginRes = await request(app).post('/usuarios/login').send({
-            mail: 'admin@gmail.com',
+            mail: 'admin@admin.com',
             password: 'admin123'
         });
         token = loginRes.body.token;
-        if (!token) throw new Error('No se pudo obtener token de login');
     });
 
     it('debe crear un nuevo producto', async () => {
@@ -67,11 +68,10 @@ describe('PUT /usuarios/perfil', () => {
     before(async () => {
         // Login para obtener token
         const loginRes = await request(app).post('/usuarios/login').send({
-            mail: 'admin@gmail.com',
+            mail: 'admin@admin.com',
             password: 'admin123'
         });
         token = loginRes.body.token;
-        if (!token) throw new Error('No se pudo obtener token de login');
 
         // Obtener perfil original
         const profileRes = await request(app)

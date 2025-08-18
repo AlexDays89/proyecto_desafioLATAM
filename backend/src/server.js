@@ -11,7 +11,7 @@ import authRoute from "./routes/auth.route.js";
 const allowedOrigins = [
     "http://localhost:5173",
     "https://proyecto-desafio-latam-rfqw.vercel.app",
-    "https://proyecto-desafiolatam-dev.onrender.com"
+    "https://proyecto-desafiolatam.onrender.com"
 ];
 
 const app = express();

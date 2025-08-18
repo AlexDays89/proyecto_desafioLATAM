@@ -31,9 +31,23 @@ export const login = async (req, res) => {
         const { mail, password } = req.body;
         const user = await authModel.login({ mail, password });
         if (!user) {
+            console.log("[LOGIN] Usuario no encontrado o credenciales inválidas", mail);
             return res.status(401).json({ error: "Credenciales inválidas" });
         }
+        // Validar que user.id_username y user.rol existan antes de firmar el JWT
+        if (!user.id_username || !user.rol) {
+            console.error("[LOGIN] Usuario sin id_username o rol", user);
+            return res.status(500).json({ error: "Usuario con datos incompletos" });
+        }
+        if (!process.env.JWT_SECRET) {
+            console.error("[LOGIN] JWT_SECRET no definido en variables de entorno");
+            return res.status(500).json({ error: "Error de configuración del servidor" });
+        }
         const token = jwt.sign({ id: user.id_username, rol: user.rol }, process.env.JWT_SECRET, { expiresIn: "1d" });
+        if (!token) {
+            console.error("[LOGIN] No se pudo generar el token", user);
+            return res.status(500).json({ error: "No se pudo generar el token" });
+        }
         res.json({
             usuario: {
                 id: user.id_username,
@@ -47,6 +61,7 @@ export const login = async (req, res) => {
             token
         });
     } catch (error) {
+        console.error("[LOGIN] Error inesperado:", error);
         res.status(500).json({ error: "Error al iniciar sesión" });
     }
 };

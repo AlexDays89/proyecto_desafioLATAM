@@ -1,11 +1,11 @@
-PROYECTO FINAL DESAFIO LATAM - HITO 2
+PROYECTO FINAL DESAFIO LATAM - HITO 4
 <br>
 CLAVE DE USUARIO PARA PRUEBA:
 <br>
-ROL admin: admin@gmail.com
+ROL admin: admin@admin.com
 PASS admin: admin123
 <br>
-ROL user: user@gmail.com
+ROL user: user@user.com
 PASS user: user123
 <br>
-PROXIMOS FIX : PASAR LAS CONSULTAS DE API DESDE EL FRONT A LOS SERVICES, PARA MANTENER EL CODIGO LIMPIO
+Pendiente de implementar: FIX de testing.

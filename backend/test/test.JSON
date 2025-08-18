@@ -97,8 +97,8 @@
         "status": 200,
         "body": {
           "id_username": 1,
-          "username": "admin@gmail.com",
-          "mail": "admin@gmail.com",
+          "username": "admin@admin.com",
+          "mail": "admin@admin.com",
           "rol": "admin",
           "nombre": "NuevoNombreTest",
           "apellido": "NuevoApellidoTest",
@@ -115,14 +115,14 @@
           "nombre": "<nombre original>",
           "apellido": "<apellido original>",
           "direccion": "<direccion original>",
-          "mail": "admin@gmail.com"
+          "mail": "admin@admin.com"
         },
         "response": {
           "status": 200,
           "body": {
             "id_username": 1,
-            "username": "admin@gmail.com",
-            "mail": "admin@gmail.com",
+            "username": "admin@admin.com",
+            "mail": "admin@admin.com",
             "rol": "admin",
             "nombre": "<nombre original>",
             "apellido": "<apellido original>",
