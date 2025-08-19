@@ -32,7 +32,7 @@ export const updateProduct = async (id, product) => {
         "UPDATE productos SET nombre = $2, precio = $3, stock = $4, categoria = $5, img = $6, descripcion = $7 WHERE id_producto = $1 RETURNING *",
         [id, product.name, product.price, product.stock, product.category, product.img, product.description]
     );
-    return result.rows[0] ? { id: result.rows[0].id_producto, nombre: result.rows[0].nombre, precio: result.rows[0].precio, stock: result.rows[0].stock, categoria: result.rows[0].categoria, img: result.rows[0].img } : null;
+    return result.rows[0] ? { id: result.rows[0].id_producto, nombre: result.rows[0].nombre, precio: result.rows[0].precio, stock: result.rows[0].stock, categoria: result.rows[0].categoria, img: result.rows[0].img, description: result.rows[0].descripcion } : null;
 };
     
 export const deleteProduct = async (id) => {

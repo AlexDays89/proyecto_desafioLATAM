@@ -19,8 +19,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(cors());
 app.use(express.json());
 
-
-
 app.get("/health", (_req, res) => res.send("ok"));
 
 app.use("/productos", productosRoute);
