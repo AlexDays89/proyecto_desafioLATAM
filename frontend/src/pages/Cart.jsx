@@ -5,8 +5,10 @@ import { useCart } from '../context/useCart';
 import { UserContext } from '../context/UserContext';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
+  const navigate = useNavigate();
   const { token } = useContext(UserContext);
   const { total, handleAdd, handleRemove, cart } = useCart();
 
@@ -45,6 +47,7 @@ const Cart = () => {
             severity="secondary" rounded raised outlined
             texto="Pagar"
             disabled={!token}
+            onClick={() => navigate("/pago")}
           />
         </div>
       </div>

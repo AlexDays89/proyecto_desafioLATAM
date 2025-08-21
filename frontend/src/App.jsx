@@ -14,6 +14,7 @@ import Contacto from './pages/Contacto';
 import CartProvider from './context/CartProvider';
 import './assets/styles/App.css'
 import Admin from './pages/Admin';
+import Pago from './pages/Pago';
 
 function App() {
   return (
@@ -76,6 +77,10 @@ function AppComponent() {
               <Route
                 path="/contacto"
                 element={<Contacto/>}
+              />
+              <Route
+                path="/pago"
+                element={<Pago/>}
               />
               <Route
               path="*"

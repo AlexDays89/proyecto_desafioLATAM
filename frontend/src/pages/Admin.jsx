@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "../context/UserContext";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { api } from "../lib/api.js";
+
 
 const Admin = () => {
     const [productos, setProductos] = useState([]);
@@ -11,12 +13,16 @@ const Admin = () => {
         stock: "",
         category: "",
         img: "",
+        description: "",
     });
     const [deleteId, setDeleteId] = useState(null); // ID del producto a Eliminar
-    const [editIndex, setEditIndex] = useState(null); // Índice del producto a editar
+    const [editProductId, setEditProductId] = useState(null); // ID del producto a editar
     const [editProducto, setEditProducto] = useState({}); // Producto a editar
     const [showModal, setShowModal] = useState(false); // Mostrar modal de edición
-    const [showDeleteModal, setShowDeleteModal] = useState(false); // Mostrar modal de eliminación
+    const [showDeleteModal, setShowDeleteModal] = useState(false);// Mostrar modal de eliminación
+    const [error, setError] = useState(false);
+    const [mensaje, setMensaje] = useState('');
+    const { token } = useContext(UserContext);
 
     // Fetch productos al montar el componente
     useEffect(() => {
@@ -52,11 +58,37 @@ const Admin = () => {
     };
 
     // Añadir producto
-    const handleAddProduct = (e) => {
+    const handleAddProduct = async (e) => {
         e.preventDefault();
         const newProduct = { ...nuevoProducto, id: Date.now() };
         setProductos([...productos, newProduct]);
         setNuevoProducto({ name: "", price: "", stock: "", category: "", img: "" });
+        try {
+            const response = await api('/productos', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json' , 
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(newProduct),
+            });
+
+            if (response.error) {
+                setError(true);
+                setMensaje(response.error || 'Error en el registro');
+                return;
+            }
+            setError(false);
+            setMensaje('Producto agregado exitosamente');
+            setTimeout(() => {
+                setShowModal(false);
+            }, 2000);
+
+        } catch (error) {
+            setError(true);
+            setMensaje('Hubo un error al agregar el producto');
+            console.error(error);
+        }
     };
 
     // Eliminar producto (muestra modal)
@@ -65,8 +97,21 @@ const Admin = () => {
         setShowDeleteModal(true);
     };
     // Confirmar eliminación
-    const confirmDeleteProduct = () => {
+    const confirmDeleteProduct = async () => {
         setProductos(productos.filter((p) => p.id !== deleteId));
+        try {
+            await api(`/productos/${deleteId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            });
+        } catch (error) {
+            setError(true);
+            setMensaje('Hubo un error al eliminar el producto');
+            console.error(error);
+        }
         setShowDeleteModal(false);
         setDeleteId(null);
     };
@@ -78,8 +123,9 @@ const Admin = () => {
 
     // Abrir modal de edición
     const handleEditClick = (index) => {
-        setEditIndex(index);
-        setEditProducto(productos[index]);
+        const producto = productos[index];
+        setEditProductId(producto.id);
+        setEditProducto(producto);
         setShowModal(true);
     };
     // Manejar inputs en el modal
@@ -87,6 +133,7 @@ const Admin = () => {
         const { name, value } = e.target;
         setEditProducto((prev) => ({ ...prev, [name]: value }));
     };
+
     // Manejar subida de imagen en edición
     const handleEditFileChange = (e) => {
         const file = e.target.files[0];
@@ -97,19 +144,41 @@ const Admin = () => {
         reader.readAsDataURL(file);
     };
     // Guardar cambios
-    const handleEditSave = (e) => {
+    const handleEditSave = async (e) => {
         e.preventDefault();
-        const updated = productos.map((p, i) =>
-            i === editIndex ? { ...editProducto } : p
-        );
-        setProductos(updated);
-        setEditIndex(null);
+        try {
+            const response = await api(`/productos/${editProductId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(editProducto),
+            });
+            if (response.error) {
+                setError(true);
+                setMensaje(response.error || 'Error en la actualización');
+                return;
+            }
+            setError(false);
+            setMensaje('Producto actualizado exitosamente');
+            setProductos(productos.map((p) =>
+                p.id === editProductId ? { ...editProducto, id: editProductId } : p ));
+            setTimeout(() => {
+                setShowModal(false);
+            }, 2000);
+        } catch (error) {
+            setError(true);
+            setMensaje('Hubo un error al actualizar el producto');
+            console.error(error);
+        }
+        setEditProductId(null);
         setShowModal(false);
     };
     // Cerrar modal
     const handleModalClose = () => {
         setShowModal(false);
-        setEditIndex(null);
+        setEditProductId(null);
     };
 
     return (
@@ -172,7 +241,6 @@ const Admin = () => {
                                 className="form-control"
                                 onChange={handleFileChange}
                                 accept="image/*"
-                                required
                             />
                         </div>
                         <div className="col">
@@ -277,6 +345,14 @@ const Admin = () => {
                                         onChange={handleEditInputChange}
                                         className="form-control mb-2"
                                         placeholder="Categoría"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="description"
+                                        value={editProducto.description || ''}
+                                        onChange={handleEditInputChange}
+                                        className="form-control mb-2"
+                                        placeholder="Descripción"
                                     />
                                 </div>
                                 <div className="modal-footer">
