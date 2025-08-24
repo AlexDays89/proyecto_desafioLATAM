@@ -1,0 +1,40 @@
+/* Estilos específicos del carrito usando variables globales */
+
+.carrito {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  min-height: 100vh;
+}
+
+li {
+  display: grid;
+  grid-template-columns: 100px 1fr 1fr 1fr;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  border-bottom: var(--border-width-thin) solid var(--text-secondary);
+  gap: var(--spacing-lg);
+}
+
+li div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.cantidad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.botondepago {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-sm) 0;
+  border-bottom: var(--border-width-thin) solid var(--text-secondary);
+}
