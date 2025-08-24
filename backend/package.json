@@ -1,38 +1,72 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "private": true,
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "mocha test/test.js",
-    "dev": "nodemon index.js",
-    "start": "node index.js"
-  },
-  "engines": {
-    "node": "20.x"
-  },
+  "author": "Raul Farias S",
+  "name": "backend-base",
+  "description": "Proyescto Base Backend",
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "private": true,
+  "version": "0.0.1",
+  "license": "MIT",
   "type": "module",
+  "main": "./src/server/server.js",
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": "22.17.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/standard/eslintrc.json"
+    ],
+    "env": {
+      "node": true,
+      "browser": false,
+      "jest": true
+    }
+  },
+  "lint-staged": {
+    "*.js": "standard"
+  },
+  "scripts": {
+    "dev": "tsx --watch ./src/index.js",
+    "start": "node dist/index.cjs ",
+    "build": "node esbuild.js",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "lint:check": "node lint-check.js",
+    "lint:auto": "node lint-check.js --fix",
+    "test": "vitest",
+    "prepare": "husky"
+  },
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.1",
-    "express": "^5.1.0",
-    "jest": "^30.0.5",
-    "jsonwebtoken": "^9.0.2",
+    "@formkit/tempo": "0.1.2",
+    "@react-email/components": "0.4.0",
+    "@react-email/render": "1.1.4",
+    "bcryptjs": "3.0.2",
+    "cors": "2.8.5",
+    "dotenv": "17.2.1",
+    "express": "5.1.0",
+    "helmet": "8.1.0",
+    "jsonwebtoken": "9.0.2",
+    "morgan": "1.10.1",
     "pg": "^8.16.3",
-    "swagger": "^0.7.5",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1",
-    "uuid": "^11.1.0",
-    "yamljs": "^0.3.0"
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "resend": "4.7.0",
+    "uuid": "11.1.0",
+    "winston": "3.17.0",
+    "zod": "4.0.14"
   },
   "devDependencies": {
-    "bcryptjs": "^3.0.2",
-    "mocha": "^11.7.1",
-    "nodemon": "^3.1.10",
-    "supertest": "^7.1.4"
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
+    "@vitest/coverage-v8": "3.2.4",
+    "@vitest/ui": "3.2.4",
+    "esbuild": "0.25.8",
+    "husky": "9.1.7",
+    "lint-staged": "16.1.2",
+    "msw": "2.10.4",
+    "standard": "17.1.2",
+    "supertest": "7.1.4",
+    "tsx": "4.20.3",
+    "vitest": "3.2.4"
   }
 }

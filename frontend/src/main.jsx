@@ -1,23 +1,19 @@
-import React from 'react'
-import App from './App.jsx'
-import ReactDOM from 'react-dom/client'
-import { StrictMode } from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import './assets/styles/index.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-// PrimeReact y PrimeIcons CSS
-import 'primereact/resources/themes/lara-light-blue/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
-// FontAwesome CSS para iconos
-import '@fortawesome/fontawesome-free/css/all.min.css';
-// Importar efecto de cursor personalizado
-import './cursorEffect.js';
+import './main.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <BrowserRouter>
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { enableMocking } from './config/environment'
+import App from './App.jsx'
+
+const renderApp = () => {
+  const rootElement = document.getElementById('root')
+  createRoot(rootElement).render(
+    <StrictMode>
       <App />
-    </BrowserRouter>
-  </StrictMode>,
-)
+    </StrictMode>
+  )
+}
+
+enableMocking()
+  .then(renderApp)
+  .catch(console.error)

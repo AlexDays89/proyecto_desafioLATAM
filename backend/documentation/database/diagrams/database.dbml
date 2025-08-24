@@ -1,0 +1,9 @@
+Table users {
+	id          uuid          [pk, not null, default: 'gen_random_uuid()']
+	email       varchar(100)  [not null, unique]
+	pass        varchar(60)   [not null]
+	firstname   varchar(50)   [not null]
+	lastname    varchar(50)   [not null]
+	username    varchar(20)   [not null, unique]
+	created_at  timestamp     [not null, default: 'CURRENT_TIMESTAMP']
+}

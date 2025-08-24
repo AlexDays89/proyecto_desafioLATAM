@@ -1,161 +1,136 @@
-import Navigation from './navigation';
-import { useContext } from 'react';
-import Boton from './boton';
-import { useCart } from '../context/useCart';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faLockOpen, faLock } from '@fortawesome/free-solid-svg-icons';
-import { UserContext } from '../context/UserContext';
-import { SplitButton } from 'primereact/splitbutton';
-import categorias from '../data/categorias';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import { useCart } from '../context/CartContext'
+import { ROUTES } from '../routes'
+import { CartFill, PersonFill, BoxArrowRight, House, Shop } from 'react-bootstrap-icons'
 
 const Navbar = () => {
-const { token, setToken, user, setUser} = useContext(UserContext);
-const navigate = useNavigate();
-const handleLogout = () => { 
-  
-  setToken(null);
-  setUser(null);
-};
-const { total } = useCart();
+  const { isAuthenticated, user, logout } = useAuth()
+  const { getCartItemsCount } = useCart()
+  const navigate = useNavigate()
 
-// Función para hacer scroll suave a las secciones
-const scrollToSection = (sectionId) => {
-  const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start'
-    });
+  const handleLogout = () => {
+    logout()
+    navigate(ROUTES.HOME)
   }
-};
 
-// Items del menú de navegación interna
-const menuItems = [
-  {
-    label: 'Acerca de',
-    command: () => {
-      navigate('/');
-      setTimeout(() => scrollToSection('acerca-de'), 100);
-    }
-  },
-  {
-    label: 'Nuestros Tipos de Tarot',
-    command: () => {
-      navigate('/');
-      setTimeout(() => scrollToSection('tipos-de-tarot'), 100);
-    }
-  },
-  {
-    label: 'Tipos de Consulta',
-    command: () => {
-      navigate('/');
-      setTimeout(() => scrollToSection('tipos-de-lectura'), 100);
-    }
-  }
-];
+  const cartItemsCount = getCartItemsCount()
 
-return (
-    <nav className="navbar d-flex justify-content-between align-items-center px-3 px-md-5">
-        <div className="links d-flex gap-3 align-items-center">
-          <img src="/img/logo.png" alt="logo" className="logo"/>
-        <Navigation to="/">
-          <Boton
-            severity="secondary" rounded raised outlined
-            texto="Home"
-          />
-        </Navigation>
+  return (
+    <nav className='navbar navbar-expand-lg navbar-custom sticky-top'>
+      <div className='container'>
+        <Link className='navbar-brand fw-bold' to={ROUTES.HOME}>
+          <Shop className='me-2' size={24} />
+          Tarot Místico
+        </Link>
 
-        {/* SplitButton de PrimeReact para navegación interna */}
-        <SplitButton
-          label="Menu"
-          onClick={() => navigate('/')}
-          model={menuItems}
-          severity="secondary"
-          rounded raised outlined
-          appendTo="self"
-          text
-        />
-        <Navigation to="/contacto">
-          <Boton
-            severity="secondary" rounded raised outlined
-            texto="Contacto"
-          />
-        </Navigation>
+        <button
+          className='navbar-toggler'
+          type='button'
+          data-bs-toggle='collapse'
+          data-bs-target='#navbarNav'
+          aria-controls='navbarNav'
+          aria-expanded='false'
+          aria-label='Toggle navigation'
+        >
+          <span className='navbar-toggler-icon' />
+        </button>
 
-        <SplitButton
-          label="Tienda"
-          onClick={() => navigate('/productos')}
-          model={categorias.map(cat => ({
-            label: cat.nombre,
-            command: () => navigate(`/productos?categoria=${encodeURIComponent(cat.nombre)}`)
-          }))}
-          rounded raised outlined
-          appendTo="self"
-        />
+        <div className='collapse navbar-collapse' id='navbarNav'>
+          <ul className='navbar-nav me-auto'>
+            <li className='nav-item'>
+              <Link className='nav-link' to={ROUTES.HOME}>
+                <House className='me-1' size={16} />
+                Inicio
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link className='nav-link' to={ROUTES.PRODUCTS}>
+                <Shop className='me-1' size={16} />
+                Productos
+              </Link>
+            </li>
+          </ul>
 
-        {token ? (
-          <>
-            <Navigation to="/profile">
-              <Boton
-                severity="secondary" rounded raised outlined
-                texto={<><FontAwesomeIcon icon={faLockOpen} /> Profile</>}
-            />
-            </Navigation>
-            <Boton
-            severity="secondary" rounded raised outlined
-            texto={<><FontAwesomeIcon icon={faLockOpen} /> Logout</>}
-            onClick={handleLogout}
-            />
-            {user?.rol === 'admin' && (
-              <Navigation to="/administracion">
-                <Boton
-                  severity="secondary" rounded raised outlined
-                  texto={<><FontAwesomeIcon icon={faLockOpen} /> Administrador</>}
-                />
-              </Navigation>
-            )}
-            </>
-          ) : token ? (
-            <>
-            <Navigation to="/profile">
-              <Boton
-                severity="secondary" rounded raised outlined
-                texto={<><FontAwesomeIcon icon={faLockOpen} /> Profile</>}
-            />
-            </Navigation>
-            <Boton
-            severity="secondary" rounded raised outlined
-            texto={<><FontAwesomeIcon icon={faLockOpen} /> Logout</>}
-            onClick={handleLogout}
-            />
-            </>
-          ) : (
-            <>
-            <Navigation to="/login">
-            <Boton
-                severity="secondary" rounded raised outlined
-                texto={<><FontAwesomeIcon icon={faLock} /> Login</>}
-            />
-            </Navigation>
-            <Navigation to="/register">
-            <Boton
-                severity="secondary" rounded raised outlined
-                texto={<><FontAwesomeIcon icon={faLock} /> Registro</>}
-            />
-            </Navigation>
-            </>
-          )}
-    </div>
-
-    <Navigation to="/cart">
-        <Boton
-            severity="secondary" rounded raised outlined
-            texto={<><FontAwesomeIcon icon={faShoppingCart} /> Total: ${total.toLocaleString()}</>}
-        />
-    </Navigation>
+          <ul className='navbar-nav'>
+            {isAuthenticated
+              ? (
+                <>
+                  <li className='nav-item'>
+                    <Link className='nav-link position-relative' to={ROUTES.CART}>
+                      <CartFill size={20} />
+                      {cartItemsCount > 0 && (
+                        <span className='position-absolute top-0 start-100 translate-middle cart-badge'>
+                          {cartItemsCount}
+                        </span>
+                      )}
+                    </Link>
+                  </li>
+                  <li className='nav-item dropdown'>
+                    <a
+                      className='nav-link dropdown-toggle'
+                      href='#'
+                      role='button'
+                      data-bs-toggle='dropdown'
+                      aria-expanded='false'
+                    >
+                      <PersonFill className='me-1' size={16} />
+                      {user?.usuario || 'Usuario'}
+                    </a>
+                    <ul className='dropdown-menu'>
+                      <li>
+                        <Link className='dropdown-item' to='/profile'>
+                          Mi Perfil
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className='dropdown-item' to={ROUTES.PURCHASES}>
+                          Mis Compras
+                        </Link>
+                      </li>
+                      {user?.rol === 'admin' && (
+                        <>
+                          <li><hr className='dropdown-divider' /></li>
+                          <li>
+                            <Link className='dropdown-item' to='/admin'>
+                              Panel Admin
+                            </Link>
+                          </li>
+                        </>
+                      )}
+                      <li><hr className='dropdown-divider' /></li>
+                      <li>
+                        <button
+                          className='dropdown-item'
+                          onClick={handleLogout}
+                        >
+                          <BoxArrowRight className='me-1' size={16} />
+                          Cerrar Sesión
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
+                </>
+                )
+              : (
+                <>
+                  <li className='nav-item'>
+                    <Link className='nav-link' to={ROUTES.LOGIN}>
+                      Iniciar Sesión
+                    </Link>
+                  </li>
+                  <li className='nav-item'>
+                    <Link className='btn btn-outline-light ms-2' to={ROUTES.REGISTER}>
+                      Registrarse
+                    </Link>
+                  </li>
+                </>
+                )}
+          </ul>
+        </div>
+      </div>
     </nav>
-);
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

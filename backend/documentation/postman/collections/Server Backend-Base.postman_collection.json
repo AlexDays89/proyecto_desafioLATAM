@@ -1,0 +1,704 @@
+{
+	"info": {
+		"_postman_id": "a52f0714-b90d-4cca-b0e4-3a7597b2efe4",
+		"name": "Server Backend-Base",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15965395"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "v1",
+					"item": [
+						{
+							"name": "auth",
+							"item": [
+								{
+									"name": "signIn",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = pm.response.json()",
+													"if (jsonData.status === true) {",
+													"    pm.environment.set('token', jsonData.data.token)",
+													"}"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"sofia.martinez@example.com\",\n  \"pass\": \"claveSegura123\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/api/v1/auth/signin",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"auth",
+												"signin"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "error",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"lina.perez84@example.com\",\n  \"pass\": \"T7k@xZp3wQ!r\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/auth/signin",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"auth",
+														"signin"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Security-Policy",
+													"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Resource-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Origin-Agent-Cluster",
+													"value": "?1"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "no-referrer"
+												},
+												{
+													"key": "Strict-Transport-Security",
+													"value": "max-age=31536000; includeSubDomains"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "X-DNS-Prefetch-Control",
+													"value": "off"
+												},
+												{
+													"key": "X-Download-Options",
+													"value": "noopen"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "SAMEORIGIN"
+												},
+												{
+													"key": "X-Permitted-Cross-Domain-Policies",
+													"value": "none"
+												},
+												{
+													"key": "X-XSS-Protection",
+													"value": "0"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "163"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"a3-EFKvE4ImYG1a86qRyMlLMdedWvI\""
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 31 Jul 2025 20:53:15 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"status\": false,\n    \"code\": 401,\n    \"error\": {\n        \"message\": \"Correo o contraseña inválidos. Intenta nuevamente.\"\n    },\n    \"timestamp\": \"jueves, 31 de julio de 2025, 16:53:15 (-04:00)\"\n}"
+										},
+										{
+											"name": "success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"sofia.martinez@example.com\",\n  \"pass\": \"claveSegura123\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/auth/signin",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"auth",
+														"signin"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Security-Policy",
+													"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Resource-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Origin-Agent-Cluster",
+													"value": "?1"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "no-referrer"
+												},
+												{
+													"key": "Strict-Transport-Security",
+													"value": "max-age=31536000; includeSubDomains"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "X-DNS-Prefetch-Control",
+													"value": "off"
+												},
+												{
+													"key": "X-Download-Options",
+													"value": "noopen"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "SAMEORIGIN"
+												},
+												{
+													"key": "X-Permitted-Cross-Domain-Policies",
+													"value": "none"
+												},
+												{
+													"key": "X-XSS-Protection",
+													"value": "0"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "473"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"1d9-GUkc6GSOzHf2Q3HbRiPlwpqFcz0\""
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 31 Jul 2025 21:08:52 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"status\": true,\n    \"code\": 200,\n    \"data\": {\n        \"message\": \"Has iniciado sesión con éxito.\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU0ZGQ1MjMzLTU4ZGMtNDY3Yi05NTc5LWRmNTAyYWUyOThkYyIsImVtYWlsIjoic29maWEubWFydGluZXpAZXhhbXBsZS5jb20iLCJmaXJzdG5hbWUiOiJTb2bDrWEiLCJsYXN0bmFtZSI6Ik1hcnTDrW5leiIsIm5pY2tuYW1lIjoic29maV9tIiwiaWF0IjoxNzUzOTk2MTMyLCJleHAiOjE3NTM5OTc5MzJ9.MiBMQilRVWDZZ74BpcfkyPZSJWl6TWJuldTZehpaS3I\"\n    },\n    \"timestamp\": \"jueves, 31 de julio de 2025, 17:08:52 (-04:00)\"\n}"
+										}
+									]
+								},
+								{
+									"name": "signup",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = pm.response.json()",
+													"if (jsonData.status === true) {",
+													"    pm.environment.set('token', jsonData.data.token)",
+													"}"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"sofia.martinez@example.com\",\n  \"pass\": \"claveSegura123\",\n  \"firstname\": \"Sofía\",\n  \"lastname\": \"Martínez\",\n  \"nickname\": \"sofi_m\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/api/v1/auth/signup",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"auth",
+												"signup"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"sofia.martinez@example.com\",\n  \"pass\": \"claveSegura123\",\n  \"firstname\": \"Sofía\",\n  \"lastname\": \"Martínez\",\n  \"nickname\": \"sofi_m\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/auth/signup",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"auth",
+														"signup"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Security-Policy",
+													"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Resource-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Origin-Agent-Cluster",
+													"value": "?1"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "no-referrer"
+												},
+												{
+													"key": "Strict-Transport-Security",
+													"value": "max-age=31536000; includeSubDomains"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "X-DNS-Prefetch-Control",
+													"value": "off"
+												},
+												{
+													"key": "X-Download-Options",
+													"value": "noopen"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "SAMEORIGIN"
+												},
+												{
+													"key": "X-Permitted-Cross-Domain-Policies",
+													"value": "none"
+												},
+												{
+													"key": "X-XSS-Protection",
+													"value": "0"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "658"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"292-cSqJRtOJGohwtexBf1PTV5Au4AE\""
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 31 Jul 2025 20:43:28 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"status\": true,\n    \"code\": 201,\n    \"data\": {\n        \"message\": \"Tu cuenta ha sido creada con éxito. Ya puedes iniciar sesión.\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMxZGJiOWY2LThjNjMtNGFkMi04M2NiLTRhMGU4MDYxNDQ4MSIsImVtYWlsIjoic29maWEubWFydGluZXpAZXhhbXBsZS5jb20iLCJmaXJzdG5hbWUiOiJTb2bDrWEiLCJsYXN0bmFtZSI6Ik1hcnTDrW5leiIsIm5pY2tuYW1lIjoic29maV9tIiwiaWF0IjoxNzUzOTk0NjA4LCJleHAiOjE3NTM5OTY0MDh9.UlCVZn_ih-69Inp05YqL7vPHcjWFVdd08p9h8TgZocM\",\n        \"user\": {\n            \"id\": \"31dbb9f6-8c63-4ad2-83cb-4a0e80614481\",\n            \"email\": \"sofia.martinez@example.com\",\n            \"firstname\": \"Sofía\",\n            \"lastname\": \"Martínez\",\n            \"nickname\": \"sofi_m\"\n        }\n    },\n    \"timestamp\": \"jueves, 31 de julio de 2025, 16:43:28 (-04:00)\"\n}"
+										},
+										{
+											"name": "error",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"sofia.martinez@example.com\",\n  \"pass\": \"claveSegura123\",\n  \"firstname\": \"Sofía\",\n  \"lastname\": \"Martínez\",\n  \"nickname\": \"sofi_m\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/auth/signup",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"auth",
+														"signup"
+													]
+												}
+											},
+											"status": "Conflict",
+											"code": 409,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Security-Policy",
+													"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Resource-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Origin-Agent-Cluster",
+													"value": "?1"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "no-referrer"
+												},
+												{
+													"key": "Strict-Transport-Security",
+													"value": "max-age=31536000; includeSubDomains"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "X-DNS-Prefetch-Control",
+													"value": "off"
+												},
+												{
+													"key": "X-Download-Options",
+													"value": "noopen"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "SAMEORIGIN"
+												},
+												{
+													"key": "X-Permitted-Cross-Domain-Policies",
+													"value": "none"
+												},
+												{
+													"key": "X-XSS-Protection",
+													"value": "0"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "169"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"a9-qlbrDTBHdMKUWxL3b4H/JBVczqQ\""
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 31 Jul 2025 20:37:44 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"status\": false,\n    \"code\": 409,\n    \"error\": {\n        \"message\": \"Parece que ya tienes una cuenta con ese correo o nickname.\"\n    },\n    \"timestamp\": \"jueves, 31 de julio de 2025, 16:37:44 (-04:00)\"\n}"
+										},
+										{
+											"name": "error payload",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"\",\n  \"pass\": \"\",\n  \"firstname\": \"\",\n  \"lastname\": \"\",\n  \"nickname\": \"\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/auth/signup",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"auth",
+														"signup"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": null,
+											"header": [
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Security-Policy",
+													"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+												},
+												{
+													"key": "Cross-Origin-Opener-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Cross-Origin-Resource-Policy",
+													"value": "same-origin"
+												},
+												{
+													"key": "Origin-Agent-Cluster",
+													"value": "?1"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "no-referrer"
+												},
+												{
+													"key": "Strict-Transport-Security",
+													"value": "max-age=31536000; includeSubDomains"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "X-DNS-Prefetch-Control",
+													"value": "off"
+												},
+												{
+													"key": "X-Download-Options",
+													"value": "noopen"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "SAMEORIGIN"
+												},
+												{
+													"key": "X-Permitted-Cross-Domain-Policies",
+													"value": "none"
+												},
+												{
+													"key": "X-XSS-Protection",
+													"value": "0"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "531"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"213-MZ2TeHlzyD/MVoOIV2DOcaVNDSU\""
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 31 Jul 2025 21:10:02 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"status\": false,\n    \"code\": 400,\n    \"error\": {\n        \"message\": \"Validation failed\",\n        \"data\": {\n            \"formErrors\": [],\n            \"fieldErrors\": {\n                \"email\": [\n                    \"Debe ser un email válido\",\n                    \"El email debe tener al menos 5 caracteres\"\n                ],\n                \"pass\": [\n                    \"La contraseña debe tener al menos 6 caracteres\"\n                ],\n                \"firstname\": [\n                    \"El nombre es requerido y debe tener al menos 4 caracteres\"\n                ],\n                \"lastname\": [\n                    \"El apellido es requerido y debe tener al menos 4 caracteres\"\n                ],\n                \"nickname\": [\n                    \"El apodo es requerido y debe tener al menos 4 caracteres\"\n                ]\n            }\n        }\n    },\n    \"timestamp\": \"jueves, 31 de julio de 2025, 17:10:02 (-04:00)\"\n}"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/health",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "not found",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

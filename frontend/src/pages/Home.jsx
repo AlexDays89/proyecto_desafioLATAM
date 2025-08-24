@@ -1,15 +1,38 @@
-import Navbar from '../components/navbar'
-import Principal from '../components/principal'
-import Footer from '../components/footer'
+import { useEffect, useState } from 'react'
+import { useProducts } from '../hooks/useProducts'
+import LoadingSpinner from '../components/LoadingSpinner'
+import HeroSection from '../components/HeroSection'
+import FeaturesSection from '../components/FeaturesSection'
+import FeaturedProducts from '../components/FeaturedProducts'
+import NewsletterSection from '../components/NewsletterSection'
 
-function Home() {
-    return (
-        <div className="contenedor-home">
-            <Navbar />
-            <Principal/>
-            <Footer />
-        </div>
-    )
+const Home = () => {
+  const { products, loading, error } = useProducts()
+  const [featuredProducts, setFeaturedProducts] = useState([])
+
+  useEffect(() => {
+    // Mostrar los primeros 4 productos como destacados
+    if (products.length > 0) {
+      setFeaturedProducts(products.slice(0, 4))
+    }
+  }, [products])
+
+  if (loading) {
+    return <LoadingSpinner text='Cargando productos destacados...' />
+  }
+
+  return (
+    <div className='fade-in'>
+      <HeroSection />
+      <FeaturesSection />
+      <FeaturedProducts
+        products={featuredProducts}
+        loading={loading}
+        error={error}
+      />
+      <NewsletterSection />
+    </div>
+  )
 }
 
 export default Home
