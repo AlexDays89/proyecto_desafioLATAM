@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../context/UserContext';
 import { api } from '../lib/api.js';
+import '../assets/styles/login.css';
 
 const Login = ({ onLoginSuccess }) => {
     const [username, setUsername] = useState('');

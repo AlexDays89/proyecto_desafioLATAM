@@ -8,6 +8,7 @@ import { UserContext } from '../context/UserContext';
 import { SplitButton } from 'primereact/splitbutton';
 import categorias from '../data/categorias';
 import { useNavigate } from 'react-router-dom';
+import '../assets/styles/navbar.css';
 
 const Navbar = () => {
 const { token, setToken, user, setUser} = useContext(UserContext);

@@ -1,0 +1,159 @@
+/* Estilos para botones del navbar con color dorado personalizado */
+.navbar {
+    min-width: 100%;
+    background-image: url('/img/navbar.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    /* Reducir espacio vertical del navbar */
+    padding: 0.5rem 0;
+    min-height: auto;
+    /* Linea divisoria inferior amarilla igual que el footer */
+    border-bottom: 3px solid #D4A574;
+}
+
+/* Overlay semitransparente para mejorar legibilidad del texto en el navbar */
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+/* Asegurar que el contenido del navbar este por encima del overlay */
+.navbar > * {
+    position: relative;
+    z-index: 2;
+}
+
+.navbar .btn {
+    background-color: #D4A574 !important;
+    border-color: #D4A574 !important;
+    color: #ffffff !important;
+    cursor: none;
+}
+
+.navbar .btn:hover {
+    background-color: #C8860D !important;
+    border-color: #C8860D !important;
+    color: #ffffff !important;
+    cursor: none;
+}
+
+.navbar .btn:focus,
+.navbar .btn:active {
+    background-color: #D4A574 !important;
+    border-color: #D4A574 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 0 0.2rem rgba(212, 165, 116, 0.25) !important;
+}
+
+/* Estilos para todos los botones de PrimeReact en el navbar con color dorado */
+.navbar .p-button {
+    background-color: #D4A574 !important;
+    border-color: #D4A574 !important;
+    color: #ffffff !important;
+}
+
+.navbar .p-button:hover {
+    background-color: #C8860D !important;
+    border-color: #C8860D !important;
+    color: #ffffff !important;
+    cursor: none;
+}
+
+.navbar .p-button:focus,
+.navbar .p-button:active {
+    background-color: #D4A574 !important;
+    border-color: #D4A574 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 0 0.2rem rgba(212, 165, 116, 0.25) !important;
+}
+
+.navbar .p-button:not(:disabled):not(.p-button-outlined):not(.p-button-text) {
+    background-color: #D4A574 !important;
+    border-color: #D4A574 !important;
+    color: #ffffff !important;
+}
+
+.navbar .p-button.p-button-outlined {
+    background-color: transparent !important;
+    border-color: #D4A574 !important;
+    color: #D4A574 !important;
+}
+
+.navbar .p-button.p-button-outlined:hover {
+    background-color: #D4A574 !important;
+    border-color: #D4A574 !important;
+    color: #ffffff !important;
+}
+
+/* Estilos para SplitButton de PrimeReact en el navbar con color dorado */
+
+
+.navbar .p-splitbutton .p-button:focus,
+.navbar .p-splitbutton .p-button:active {
+    background-color: #D4A574 !important;
+    border-color: #D4A574 !important;
+    box-shadow: 0 0 0 0.2rem rgba(212, 165, 116, 0.25) !important;
+}
+
+/* Estilos para el menu desplegable del SplitButton con color dorado */
+.navbar .p-splitbutton .p-menu {
+    background-color: #D4A574 !important;
+    border-color: #D4A574 !important;
+}
+
+.navbar .p-splitbutton .p-menu .p-menuitem-link {
+    color: #ffffff !important;
+}
+
+.navbar .p-splitbutton .p-menu .p-menuitem-link:hover {
+    background-color: #C8860D !important;
+    color: #ffffff !important;
+}
+
+.p-splitbutton .p-menu .p-menuitem-content {
+    display: flex;
+    justify-content: center;
+}
+
+.p-splitbutton .p-menu .p-tieredmenu-root-list {
+    padding-left: 1.5rem !important;
+    margin-left: 0 !important;
+    list-style: none;
+}
+
+.p-splitbutton .p-menu {
+    left: 0 !important;
+    right: auto !important;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+.p-splitbutton .p-menu .p-menuitem-link {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    border-left: none !important;
+    border-right: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.p-splitbutton .p-menu .p-menuitem-separator {
+    margin: 0;
+    width: 100%;
+    border-left: none !important;
+    border-right: none !important;
+}

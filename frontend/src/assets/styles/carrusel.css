@@ -42,3 +42,39 @@
     border-radius: 50%;
     margin: 0 5px;
 }
+
+/* Seccion del carrusel Nuestros Servicios con fondo bg3.jpg */
+.carrusel-servicios-section {
+    background-image: url('/img/bg3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 60px 0;
+    /* Linea divisoria inferior amarilla igual que el navbar */
+    border-bottom: 3px solid #D4A574;
+}
+
+/* Overlay semitransparente para mejorar legibilidad en carrusel servicios */
+.carrusel-servicios-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+/* Contenido del carrusel por encima del overlay */
+.carrusel-servicios-section > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Estilos especificos para el titulo del carrusel */
+.carrusel-servicios-section h2 {
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
