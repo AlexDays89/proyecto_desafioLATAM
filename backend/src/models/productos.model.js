@@ -1,7 +1,7 @@
 import pool from "../../schemas/db.js";
 
 export const getProducts = async () => {
-    const result = await pool.query("SELECT * FROM productos");
+    const result = await pool.query("SELECT * FROM productos ORDER BY id_producto ASC");
     return result.rows;
 };
 
@@ -38,4 +38,12 @@ export const updateProduct = async (id, product) => {
 export const deleteProduct = async (id) => {
     const result = await pool.query("DELETE FROM productos WHERE id_producto = $1 RETURNING *", [id]);
     return result.rows[0];
+};
+
+export const updateProductStock = async (id, newStock) => {
+    const result = await pool.query(
+        "UPDATE productos SET stock = $2 WHERE id_producto = $1 RETURNING *",
+        [id, newStock]
+    );
+    return result.rows[0] ? { id: result.rows[0].id_producto, stock: result.rows[0].stock } : null;
 };

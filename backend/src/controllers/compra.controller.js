@@ -1,6 +1,6 @@
 import { crearCompraDB, agregarItemsCarrito, getItemsByCompraDB, getComprasByUsuarioDB } from "../models/compras.model.js";
+import { updateProductStock, getProductById } from "../models/productos.model.js";
 
-// Crea una compra y sus items asociados
 export const crearCompra = async (req, res) => {
     const { id_usuario, items, total } = req.body;
 
@@ -9,10 +9,24 @@ export const crearCompra = async (req, res) => {
     }
 
     try {
-        // Crear compra principal y obtener id_compra
+        // 1. Verifica stock de todos los productos
+        for (const item of items) {
+            const productoActual = await getProductById(item.id_producto);
+            if (!productoActual || productoActual.stock < item.cantidad) {
+                return res.status(400).json({ error: `No hay stock suficiente para el producto ${item.id_producto}` });
+            }
+        }
+
+        // 2. Crea la compra e items
         const { id_compra, fecha_compra } = await crearCompraDB(id_usuario, total);
-        // Agregar items al carrito_items
         await agregarItemsCarrito(id_compra, items);
+
+        // 3. Descuenta el stock
+        for (const item of items) {
+            const productoActual = await getProductById(item.id_producto);
+            await updateProductStock(item.id_producto, productoActual.stock - item.cantidad);
+        }
+
         res.status(201).json({ id_compra, fecha_compra });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -38,4 +52,3 @@ export const getItemsByCompra = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-    
