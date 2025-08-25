@@ -102,15 +102,16 @@ const Profile = () => {
 
     const verDetalle = async (id_compra) => {
         try {
-            const data = await api(`/compras/${id_compra}/items`, {
+            const data = await api(`/compras/${id_compra}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setDetalle({ id_compra, items: data });
         } catch {
             setDetalle({ id_compra, items: [] });
         }
-        console.log(detalle);
     };
+
+    const cerrarDetalle = () => setDetalle(null);
 
     return (
         <div className="contenedor-home">
@@ -230,7 +231,7 @@ const Profile = () => {
                                     ) : (
                                         <p>No hay productos en esta compra.</p>
                                     )}
-                                    <button className="btn btn-secondary" onClick={() => setDetalle(null)}>Cerrar</button>
+                                    <button className="btn btn-secondary" onClick={cerrarDetalle}>Cerrar</button>
                                 </div>
                             )}
                         </div>

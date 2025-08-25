@@ -12,7 +12,7 @@ import { api } from '../lib/api.js';
 const Pago = () => {
   const navigate = useNavigate();
   const { token } = useContext(UserContext);
-  const { total, cart } = useCart();
+  const { total, cart, clearCart } = useCart();
   const [showPopup, setShowPopup] = useState(false);
 
   const { user } = useContext(UserContext);
@@ -41,6 +41,7 @@ const Pago = () => {
         window.localStorage.removeItem('cart');
       }
       setShowPopup(true);
+      clearCart();
     } catch {
       alert("Hubo un error al procesar la compra");
     }
@@ -51,18 +52,16 @@ const Pago = () => {
     navigate("/profile");
   };
 
-  const renderCartItem = ({ name, price, img }) => (
-    <li className="cart-item">
-      <div className="resumen_carrito">
-        <div>
-          <img className="imagenProducto" src={img} alt={`Imagen de ${name}`} />
-        </div>
-        <div>
-          <p>{name}</p>
-        </div>
-        <div className="text-center">
-          <p className="precio">${price.toLocaleString()}</p>
-        </div>
+  const renderCartItem = ({ id, name, price, img }) => (
+    <li key={id} className="cart-item justify-self-center">
+      <div>
+        <img className="imagenProducto" src={img} alt={`Imagen de ${name}`} />
+      </div>
+      <div>
+        <p>{name}</p>
+      </div>
+      <div className="text-center">
+        <p className="precio">${price.toLocaleString()}</p>
       </div>
     </li>
   );
@@ -70,11 +69,11 @@ const Pago = () => {
   return (
     <div className="contenedor-home carrito-section">
       <Navbar />
-    <div className="carrito">
-      <h1>Detalles del pedido</h1>
-      <ul className="cart-list">
-        {cart.length > 0 ? cart.map(item => renderCartItem({ ...item, key: item.id })) : <li>El carrito está vacío.</li>}
-      </ul>
+      <div className="carrito">
+        <h1>Detalles del pedido</h1>
+        <ul className="cart-list" style={{ padding: 0 }}>
+          {cart.length > 0 ? cart.map(item => renderCartItem(item)) : <li>El carrito está vacío.</li>}
+        </ul>
       <div>
         <h3 className="total">Total: ${total.toLocaleString()}</h3>
         <div className="botondepago">
