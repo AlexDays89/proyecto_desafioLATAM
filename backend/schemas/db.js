@@ -17,7 +17,6 @@ const pool = useUrl
       database: process.env.DATABASE_NAME || "aritarot_db",
       user: process.env.DATABASE_USER || "postgres",
       password: process.env.DATABASE_PASSWORD || "postgres",
-      JWT_SECRET: process.env.JWT_SECRET || "jwt_secreto_dev",
       ssl: process.env.DATABASE_SSL === "require" ? { rejectUnauthorized: false } : false,
     });
 

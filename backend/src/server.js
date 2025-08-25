@@ -7,6 +7,7 @@ dotenv.config();
 
 import productosRoute from "./routes/productos.route.js";
 import authRoute from "./routes/auth.route.js";
+import comprasRoute from "./routes/compras.route.js";
 
 const allowedOrigins = [
     "http://localhost:5173",
@@ -16,13 +17,19 @@ const allowedOrigins = [
 
 const app = express();
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use(cors());
+app.use(cors(
+    {
+        origin: allowedOrigins,
+        credentials: true
+    }
+));
 app.use(express.json());
 
 app.get("/health", (_req, res) => res.send("ok"));
 
 app.use("/productos", productosRoute);
 app.use("/usuarios", authRoute);
+app.use("/compras", comprasRoute);
 
 app.use((err, _req, res, _next) => {
     console.error("ERROR:", err);
