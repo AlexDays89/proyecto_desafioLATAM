@@ -4,9 +4,9 @@ CREATE TABLE usuarios (
     direccion VARCHAR(255),
     mail VARCHAR(30) UNIQUE NOT NULL,
     password VARCHAR(16) NOT NULL,
-    rol VARCHAR(20) DEFAULT 'user'
+    rol VARCHAR(20) DEFAULT 'user',
     nombre VARCHAR(100),
-    apellido VARCHAR(100),
+    apellido VARCHAR(100)
 );
 
 CREATE TABLE carritos_activos (
