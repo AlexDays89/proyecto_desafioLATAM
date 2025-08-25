@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: Documentación de la API de Productos
 servers:
-  - url: https://proyecto-desafiolatam.onrender.com/
+  - url: https://proyecto-desafio-latam-rfqw.vercel.app/
 components:
   securitySchemes:
     bearerAuth:
@@ -15,7 +15,7 @@ components:
     Producto:
       type: object
       properties:
-        id: { type: serial, example: 1 }
+        id: { type: integer, example: 1 }
         name: { type: string, example: "Producto A" }
         price: { type: integer, example: 1000 }
         stock: { type: integer, example: 10 }
@@ -35,31 +35,17 @@ components:
     Usuario:
       type: object
       properties:
-        id: { type: serial, example: 1 }
+        id: { type: integer, example: 1 }
         username: { type: string, example: "usuario123" }
         mail: { type: string, example: "usuario@email.com" }
         rol: { type: string, example: "user" }
         nombre: { type: string, example: "Juan" }
-        apellido: { type: string, example: "Pérez" }
-        direccion: { type: string, example: "Calle 123" }
-    UsuarioInput:
-      type: object
-      properties:
-        username: { type: string, example: "usuario123" }
-        mail: { type: string, example: "usuario@email.com" }
-        password: { type: string, example: "123456" }
-        rol: { type: string, example: "user" }
-        nombre: { type: string, example: "Juan" }
-        apellido: { type: string, example: "Pérez" }
-        direccion: { type: string, example: "Calle 123" }
-      required: [username, mail, password, nombre, apellido, direccion]
 paths:
   /productos:
     get:
-      summary: Obtiene todos los productos
-      tags: [Productos]
+      summary: Obtener todos los productos
       responses:
-        200:
+        '200':
           description: Lista de productos
           content:
             application/json:
@@ -68,8 +54,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Producto'
     post:
-      summary: Crea un nuevo producto (requiere admin)
-      tags: [Productos]
+      summary: Crear un producto
       security:
         - bearerAuth: []
       requestBody:
@@ -79,46 +64,38 @@ paths:
             schema:
               $ref: '#/components/schemas/ProductoInput'
       responses:
-        201:
+        '201':
           description: Producto creado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Producto'
-        401:
-          description: No autorizado
   /productos/{id}:
     get:
-      summary: Obtiene un producto por ID
-      tags: [Productos]
+      summary: Obtener producto por ID
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
           schema:
             type: integer
-          description: ID del producto
       responses:
-        200:
+        '200':
           description: Producto encontrado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Producto'
-        404:
-          description: Producto no encontrado
     put:
-      summary: Actualiza un producto existente (requiere admin)
-      tags: [Productos]
+      summary: Actualizar producto
       security:
         - bearerAuth: []
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
           schema:
             type: integer
-          description: ID del producto
       requestBody:
         required: true
         content:
@@ -126,39 +103,24 @@ paths:
             schema:
               $ref: '#/components/schemas/ProductoInput'
       responses:
-        200:
+        '200':
           description: Producto actualizado
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Producto'
-        401:
-          description: No autorizado
-        404:
-          description: Producto no encontrado
     delete:
-      summary: Elimina un producto por ID (requiere admin)
-      tags: [Productos]
+      summary: Eliminar producto
       security:
         - bearerAuth: []
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
           schema:
             type: integer
-          description: ID del producto
       responses:
-        200:
+        '204':
           description: Producto eliminado
-        401:
-          description: No autorizado
-        404:
-          description: Producto no encontrado
   /usuarios/login:
     post:
-      summary: Inicia sesión de usuario
-      tags: [Usuarios]
+      summary: Login de usuario
       requestBody:
         required: true
         content:
@@ -166,30 +128,16 @@ paths:
             schema:
               type: object
               properties:
-                mail:
+                username:
                   type: string
-                  example: usuario@email.com
                 password:
                   type: string
-                  example: 123456
       responses:
-        200:
+        '200':
           description: Login exitoso
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  usuario:
-                    $ref: '#/components/schemas/Usuario'
-                  token:
-                    type: string
-        401:
-          description: Credenciales inválidas
   /usuarios/register:
     post:
-      summary: Registra un nuevo usuario
-      tags: [Usuarios]
+      summary: Registro de usuario
       requestBody:
         required: true
         content:
@@ -197,37 +145,22 @@ paths:
             schema:
               $ref: '#/components/schemas/UsuarioInput'
       responses:
-        201:
-          description: Registro exitoso
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  usuario:
-                    $ref: '#/components/schemas/Usuario'
-                  token:
-                    type: string
-        500:
-          description: Error al registrar el usuario
+        '201':
+          description: Usuario registrado
   /usuarios/perfil:
     get:
-      summary: Obtiene el perfil del usuario autenticado
-      tags: [Usuarios]
+      summary: Obtener perfil de usuario
       security:
         - bearerAuth: []
       responses:
-        200:
+        '200':
           description: Perfil del usuario
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Usuario'
-        401:
-          description: No autorizado
     put:
-      summary: Actualiza el perfil del usuario autenticado
-      tags: [Usuarios]
+      summary: Actualizar perfil de usuario
       security:
         - bearerAuth: []
       requestBody:
@@ -246,11 +179,125 @@ paths:
                 mail:
                   type: string
       responses:
-        200:
+        '200':
           description: Perfil actualizado
+  /compras:
+    post:
+      summary: Crear una compra
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                usuarioId:
+                  type: integer
+                productos:
+                  type: array
+                  items:
+                    type: object
+      responses:
+        '201':
+          description: Compra creada
+  /compras/usuario/{id}:
+    get:
+      summary: Obtiene compras por usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Compras del usuario
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Usuario'
-        401:
-          description: No autorizado
+                type: array
+                items:
+                  type: object
+  /compras/{id}:
+    get:
+      summary: Obtiene items de una compra
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Items de la compra
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /health:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: ok
+          content:
+            text/plain:
+              schema:
+                type: string
+          type: integer
+      required: [nombre, descripcion, precio, stock]
+    ProductoInput:
+      type: object
+      properties:
+        nombre:
+          type: string
+        descripcion:
+          type: string
+        precio:
+          type: number
+        stock:
+          type: integer
+      required: [nombre, descripcion, precio, stock]
+    Usuario:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        mail:
+          type: string
+        rol:
+          type: string
+        nombre:
+          type: string
+        apellido:
+          type: string
+        direccion:
+          type: string
+      required: [username, mail, rol, nombre, apellido, direccion]
+    UsuarioInput:
+      type: object
+      properties:
+        username:
+          type: string
+        mail:
+          type: string
+        password:
+          type: string
+        rol:
+          type: string
+        nombre:
+          type: string
+        apellido:
+          type: string
+        direccion:
+          type: string
+      required: [username, mail, password, nombre, apellido, direccion]
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
