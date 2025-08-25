@@ -14,6 +14,7 @@ export const getProducts = async (req, res) => {
         }));
         res.json(productosFront);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: "Error al obtener productos" });
     }
 };
