@@ -1,5 +1,5 @@
 import authModel from '../models/auth.model.js'
-import { jwtSing } from '../../../../utils/auth/jwt.js'
+import { jwtSign } from '../../../../utils/auth/jwt.js'
 import { sendEmail } from '../../../services/mailer/resend.js'
 import logger from '../../../../utils/logger.js'
 import tempo from '../../../../utils/tempo.js'
@@ -23,7 +23,7 @@ export const signIn = async (req, res) => {
       })
     }
 
-    const token = jwtSing({ id: user.id, mail: user.mail, rol: user.rol })
+    const token = jwtSign({ id: user.id, mail: user.mail, rol: user.rol })
 
     // Enviar email de notificación usando la estructura original
     await sendEmail.signIn({
@@ -82,7 +82,7 @@ export const signUp = async (req, res) => {
 
     const [user] = await authModel.createUser({ usuario, mail, password, direccion })
 
-    const token = jwtSing({ id: user.id, mail: user.mail, rol: user.rol })
+    const token = jwtSign({ id: user.id, mail: user.mail, rol: user.rol })
 
     // Enviar email de bienvenida usando la estructura original
     await sendEmail.signUp({

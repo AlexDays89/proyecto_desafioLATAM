@@ -25,6 +25,6 @@ app.use('/api/v1', APIv1)
 app.use('/health', middleware.health)
 app.use(middleware.notFound)
 
-app.listen(PORT, () => console.log('Server UP!'))
+app.listen(PORT, () => console.log('Server started on PORT:', PORT))
 
 export default app

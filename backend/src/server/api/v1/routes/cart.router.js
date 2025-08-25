@@ -9,7 +9,7 @@ import {
   getPurchaseHistory,
   getPurchaseDetail
 } from '../controllers/cart.controller.js'
-import { validateSchema } from '../../../middlewares/validateSchema.middleware.js'
+import { validateSchema } from '../middlewares/validateSchema.middleware.js'
 import { authMiddleware } from '../../../middlewares/auth.middleware.js'
 import cartSchema from '../schemas/cart.schema.js'
 

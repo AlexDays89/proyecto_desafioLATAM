@@ -11,6 +11,8 @@ const pool = new Pool({
   ssl: process.env.PG_SSL === 'true'
 })
 
+console.log('Conexión a la base de datos establecida')
+
 const sqlConnection = (query, values) => pool
   .query(query, values)
   .then(({ rows }) => rows)

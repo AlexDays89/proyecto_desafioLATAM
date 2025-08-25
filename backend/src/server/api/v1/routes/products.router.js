@@ -6,7 +6,7 @@ import {
   updateExistingProduct,
   deleteExistingProduct
 } from '../controllers/products.controller.js'
-import { validateSchema } from '../../../middlewares/validateSchema.middleware.js'
+import { validateSchema } from '../middlewares/validateSchema.middleware.js'
 import { authMiddleware, adminMiddleware } from '../../../middlewares/auth.middleware.js'
 import productsSchema from '../schemas/products.schema.js'
 

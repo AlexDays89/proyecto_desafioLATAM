@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import validateSchema from '../middlewares/validateSchema.middleware.js'
-import { authMiddleware } from '../middlewares/auth.middleware.js'
+import { authMiddleware } from '../../../middlewares/auth.middleware.js'
 import authSchemas from '../schemas/auth.schema.js'
 import * as auth from '../controllers/auth.controller.js'
 
