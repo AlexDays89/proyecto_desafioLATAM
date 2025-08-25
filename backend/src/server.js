@@ -11,12 +11,8 @@ import comprasRoute from "./routes/compras.route.js";
 
 const app = express();
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true
-}));
-app.options('/productos', cors());
-app.options(/.*/, cors());
+app.use(cors());
+app.use(express.json());
 
 app.get("/health", (_req, res) => res.send("ok"));
 
