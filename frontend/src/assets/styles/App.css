@@ -1,10 +1,11 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #1a1a2e;
-  color: #ffffff;
-  cursor: none; /* Ocultar cursor por defecto para el efecto personalizado */
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a2e;
+    color: #ffffff;
+    cursor: none;  /* Ocultar cursor por defecto para el efecto personalizado */
+    overflow-x: hidden;
 }
 
 .contenedor-home{
