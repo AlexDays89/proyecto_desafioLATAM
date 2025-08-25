@@ -49,7 +49,7 @@ function Principal() {
                 </div>
             </div>
             {/* Sección Tipos de Tarot */}
-            <div className="tipos-tarot-section">
+            <div className="tipos-tarot-section" id="tipos-de-tarot">
                 <TiposTarot />
             </div>
 
