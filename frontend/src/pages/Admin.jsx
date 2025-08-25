@@ -47,16 +47,6 @@ const Admin = () => {
         setNuevoProducto((prev) => ({ ...prev, [name]: value }));
     };
 
-    // Manejar subida de imagen al crear
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setNuevoProducto((prev) => ({ ...prev, img: reader.result }));
-        };
-        reader.readAsDataURL(file);
-    };
-
     // Añadir producto
     const handleAddProduct = async (e) => {
         e.preventDefault();
@@ -132,16 +122,6 @@ const Admin = () => {
     const handleEditInputChange = (e) => {
         const { name, value } = e.target;
         setEditProducto((prev) => ({ ...prev, [name]: value }));
-    };
-
-    // Manejar subida de imagen en edición
-    const handleEditFileChange = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setEditProducto((prev) => ({ ...prev, img: reader.result }));
-        };
-        reader.readAsDataURL(file);
     };
     // Guardar cambios
     const handleEditSave = async (e) => {
@@ -237,10 +217,13 @@ const Admin = () => {
                         </div>
                         <div className="col">
                             <input
-                                type="file"
+                                type="text"
+                                name="img"
                                 className="form-control"
-                                onChange={handleFileChange}
-                                accept="image/*"
+                                placeholder="Imagen"
+                                value={nuevoProducto.img}
+                                onChange={handleInputChange}
+                                required
                             />
                         </div>
                         <div className="col">
@@ -309,10 +292,13 @@ const Admin = () => {
                                 <div className="modal-body">
                                     <img src={editProducto.img} alt="" width={100} className="mb-3" />
                                     <input
-                                        type="file"
+                                        type="text"
+                                        name="img"
                                         className="form-control mb-2"
-                                        onChange={handleEditFileChange}
+                                        onChange={handleEditInputChange}
                                         accept="image/*"
+                                        placeholder="Imagen"
+                                        value={editProducto.img || ''}
                                     />
                                     <input
                                         type="text"
