@@ -13,7 +13,7 @@ const app = express();
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(cors(
     {
-        credentials: true
+        origin: "*"
     }
 ));
 app.use(express.json());
