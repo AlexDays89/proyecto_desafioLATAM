@@ -9,17 +9,10 @@ import productosRoute from "./routes/productos.route.js";
 import authRoute from "./routes/auth.route.js";
 import comprasRoute from "./routes/compras.route.js";
 
-const allowedOrigins = [
-    "http://localhost:5173",
-    "https://proyecto-desafio-latam-rfqw.vercel.app",
-    "https://proyecto-desafiolatam.onrender.com"
-];
-
 const app = express();
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(cors(
     {
-        origin: allowedOrigins,
         credentials: true
     }
 ));
