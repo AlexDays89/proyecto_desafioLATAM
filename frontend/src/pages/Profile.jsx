@@ -34,7 +34,8 @@ const Profile = () => {
 
     const handleLogout = () => {
         
-        setToken(false);
+        setToken(null);
+        setUser(null);
     };
 
     const handleChange = (e) => {
